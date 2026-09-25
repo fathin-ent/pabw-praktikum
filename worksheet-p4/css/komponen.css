@@ -34,9 +34,6 @@ button {
   outline-offset: 2px;
 }
  
-/* SALAH — form tampak merah padahal pengguna belum menyentuhnya */
-input:invalid { border-color: var(--color-danger); }
- 
 /* BENAR — hanya setelah pengguna mengetik sesuatu yang tidak sah */
 input:user-invalid {
   border-color: var(--color-danger);
@@ -47,3 +44,35 @@ input:user-invalid {
 .pesan-galat       { display: none; color: var(--color-danger); font-size: var(--text-sm); }
 .form-kolom:has(input:user-invalid) .pesan-galat { display: block; }
 
+/* Tata letak form */
+fieldset p {
+  display: grid;
+  grid-template-columns: 180px minmax(250px, 420px) 1fr;
+  gap: var(--space-2);
+  align-items: center;
+  margin-bottom: var(--space-4);
+}
+
+fieldset label {
+  font-weight: 700;
+}
+
+fieldset input,
+fieldset textarea,
+fieldset select {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+fieldset textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+#nim-bantuan {
+  font-size: var(--text-sm);
+}
+
+fieldset button {
+  margin-left: 180px;
+}

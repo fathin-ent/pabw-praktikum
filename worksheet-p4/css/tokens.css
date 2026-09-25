@@ -1,12 +1,12 @@
-/* LAPIS 1 — primitif: nilai mentah, tidak menyebut peran apa pun */
+/* LAPIS 1 — primitif */
 :root {
-  --mauve-700: #875d55;
-  --mauve-500: #a67a6f;
-  --cream-50:  #f3ead8;
-  --navy-900:  #040619;
-  --blue-surface: #e9f0f4;
-  --red-700:   #ab070a;
-  --pink-300:  #ffbdd5;
+  --pink-500: #E49BB7;   /* pink terang untuk aksen */
+  --pink-700: #8F365D;   /* pink gelap untuk teks/link */
+  --cream-100: #EEE6DC;
+  --brown-900: #362D2B;
+  --offwhite-100: #F6F2F0;
+  --taupe-500: #B8AD9F;
+  --red-800: #8A0507;
 
   --space-1: 0.25rem;
   --space-2: 0.5rem;
@@ -24,15 +24,15 @@
   --text-3xl: 2.25rem;
 }
 
-/* LAPIS 2 — semantik: peran. Isinya mengacu ke lapis 1. */
+/* LAPIS 2 — semantik */
 :root {
-  --color-bg:      var(--cream-50);
-  --color-fg:      var(--navy-900);
-  --color-surface: var(--blue-surface);
-  --color-border:  var(--mauve-500);
-  --color-primary: var(--mauve-700);
-  --color-danger:  var(--red-700);
-  --color-focus:   var(--pink-300);
+  --color-bg:      var(--cream-100);
+  --color-fg:      var(--brown-900);
+  --color-surface: var(--offwhite-100);
+  --color-border:  var(--taupe-500);
+  --color-primary: var(--pink-700);
+  --color-danger:  var(--red-800);
+  --color-focus:   var(--brown-900);
 
   --card-pad:    var(--space-4);
   --section-gap: var(--space-6);
