@@ -18,10 +18,10 @@ Universitas Islam Indonesia dengan jurusan Informatika. Website ini..
 
 Arah visual: Cerah dan ringan
 
-- Warna utama: 
-- Warna netral terang: 
-- Warna netral gelap: 
-- Ukuran huruf: 
+- Warna utama: #e7f3ea
+- Warna netral terang: #cac9cb 
+- Warna netral gelap: #635e60 #e0cea7
+- Ukuran huruf: isi 1rem, h1 2rem, h2 1.5rem
 - Jarak dasar antar elemen: 1rem
 - Radius sudut: 0.5rem
 - Bayangan: lembut, 0 2px 8px rgba(0,0,0,0.08)
