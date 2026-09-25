@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<!--
+  KERANGKA PROFIL — PABW 2026/2027 — Pertemuan 4
+  ==================================================================
+  Berkas ini SUDAH LENGKAP dan sudah lolos W3C Nu Html Checker serta
+  Lighthouse Accessibility. JANGAN mengubah struktur, landmark, label,
+  atau alt untuk memperbaiki tampilan — tampilan diubah dari berkas CSS.
+
+  Tugas Anda di Pertemuan 4:
+    1. Ganti isi yang ditandai  [ISI]  dengan milik Anda sendiri.
+    2. Buat lima berkas CSS di folder css/ lalu buka komentar
+       lima baris <link> di bawah  (lihat Lembar D).
+    3. WAJIB — tambahkan MINIMAL TIGA bagian baru di dalam <main>,
+       masing-masing memakai elemen semantik yang belum terpakai dan
+       berbeda satu sama lain  (lihat Lembar B.3). Setiap bagian wajib
+       diberi gaya memakai token yang sama, lalu dievaluasi W3C dan WCAG.
+-->
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <!-- ISI 1 — judul tab dan hasil pencarian. Ganti dengan nama Anda. -->
+  <title>Profil Fathin Nishrina </title>
+  <meta name="description" content="Halaman profil mahasiswa PABW: tentang saya, karya, dan kontak.">
+
+  <!-- LEMBAR D — buat lima berkas di folder css/, lalu buka komentar ini.
+       URUTAN PEMUATAN MENENTUKAN CASCADE: tokens, base, layout, komponen, tema.
+       Lapisan paling bawah menang tanpa perlu !important. -->
+  <!-- <link rel="stylesheet" href="css/tokens.css"> -->
+  <!-- <link rel="stylesheet" href="css/base.css"> -->
+  <!-- <link rel="stylesheet" href="css/layout.css"> -->
+  <!-- <link rel="stylesheet" href="css/komponen.css"> -->
+  <!-- <link rel="stylesheet" href="css/tema.css"> -->
+</head>
+<body>
+  <a class="lewati" href="#utama">Lewati ke konten utama</a>
+
+  <header class="kepala">
+    <!-- ISI 2 — nama Anda, atau nama panggilan yang Anda pakai. -->
+    <h1>Fathin Nishrina</h1>
+    <!-- ISI 3 — satu kalimat tentang diri Anda. -->
+    <p class="tagline">Turning Code into Solutions & Movie Plots into Inspiration.</p>
+    <nav aria-label="Navigasi utama">
+      <ul>
+        <li><a href="#tentang">Tentang</a></li>
+        <li><a href="#karya">Karya</a></li>
+        <li><a href="#sedang-dikerjakan">Sedang Dikerjakan</a></li>
+        <li><a href="#hobi">Hobi</a></li>
+        <li><a href="#tanya-jawab">Tanya jawab</a></li>
+        <li><a href="#kontak">Kontak</a></li>
+       
+      </ul>
+    </nav>
+  </header>
+
+  <main id="utama">
+
+    <section id="tentang">
+      <h2>Tentang saya</h2>
+
+      <figure class="foto">
+        <!-- ISI 4 — pakai foto Anda sendiri dengan nama berkas yang sama,
+             atau biarkan berkas contoh apa adanya. -->
+        <img src="media/foto-profil.jpg"
+             alt="Foto diri Fathin Nishrina memakai kemeja putih."
+             width="480" height="480" loading="lazy">
+        <figcaption>Foto Profil Fathin Nishrina</figcaption>
+      </figure>
+
+      <!-- ISI 5 — dua sampai tiga kalimat: asal, minat, dan hal yang
+           sedang Anda pelajari. -->
+      <p>Halo halo selamat datang di website profile saya! perkenalkan nama saya Fathin Nishrina Nurul Auliya, 
+        seorang mahasiswi di Universitas Islam Indonesia dengan jurusan Informatika. Saya berasal dari Kota Militer yaitu Cimahi, Jawa Barat. 
+        Website ini, hasil dari yang sedang saya pelajari, dibuat untuk menampilkan profil pribadi saya dan karya-karya 
+        yang telah saya kerjakan selama berkuliah di Universitas Islam Indonesia.</p>
+
+      <table>
+        <!-- ISI 6 — judul tabel dan isi minimal tiga baris. -->
+        <caption>Kegiatan yang saya ikuti semester ini</caption>
+        <thead>
+          <tr>
+            <th scope="col">Kegiatan</th>
+            <th scope="col">Peran</th>
+            <th scope="col">Waktu</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Praktikum PABW</th>
+            <td>Peserta</td>
+            <td><time datetime="2026-09">September 2026</time></td>
+          </tr>
+          <tr>
+            <th scope="row">AISEC Future Leaders</th>
+            <td>Peserta</td>
+            <td><time datetime="2026-10">Oktober 2026</time></td>
+          </tr>
+          <tr>
+            <th scope="row">Kepanitiaan Porsematik</th>
+            <td>Sekretaris OC</td>
+            <td><time datetime="2026">2026</time></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="karya">
+      <h2>Karya saya</h2>
+      <!-- ISI 7 — tiga karya, proyek, atau hal yang pernah Anda buat.
+           Boleh tugas kuliah, karya pribadi, atau hobi. -->
+      <ul>
+        <li>Halaman Kelas Terbuka Kampus — praktikum P03, HTML semantik dan form.</li>
+        <li>Desain UI/UX — yang dibuat di Figma</li>
+        <li>NexsisApp — Aplikasi Desktop berbasis Java</li>
+      </ul>
+    </section>
+
+   <section id="galeri-karya">
+  <h2>Galeri karya</h2>
+  <ul>
+    <li>
+      <figure>
+        <video controls width="400">
+          <source src="media/DemoNexsisApp_Kasir.mp4" type="video/mp4">
+          Video demo tidak dapat diputar di peramban Anda.
+        </video>
+        <figcaption>Demo Aplikasi Nexsis App – Kasir</figcaption>
+      </figure>
+    </li>
+    <li>
+      <figure>
+        <figcaption>
+          Demo Figma Aplikasi Sebaya —
+          <a href="https://www.figma.com/proto/QRwjFWLdPJK9lhxR4JJ5zM/Sebaya?node-id=42-38&t=LjPQE9RrnbJQrxxE-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=42%3A38"
+             target="_blank" rel="noopener">Coba prototipe di Figma Sebaya</a>
+        </figcaption>
+      </figure>
+    </li>
+  </ul>
+</section>
+
+<section id="sedang-dikerjakan">
+  <h2>Sedang saya kerjakan</h2>
+  <article>
+    <h3>Halaman profil ini</h3>
+    <p>Memberi gaya pada struktur yang sudah lolos audit, memakai warna yang
+       saya turunkan dari foto saya sendiri.</p>
+    <p>Dimulai <time datetime="2026-09-21">25 September 2026</time>.</p>
+  </article>
+
+  <article>
+    <h3>Projek Pengembangan Platform Web Interaktif sebagai Media Komunikasi Orang Tua -Anak Usia 4 - 9 Tahun</h3>
+    <p>Proyek pengembangan platform web interaktif yang berfungsi sebagai media pendidikan informal untuk menstimulasi 
+    komunikasi positif antara orang tua dan anak usia 4–9 tahun. Platform ini dirancang untuk mendukung ekosistem belajar 
+    mandiri di rumah, memanfaatkan fitur edukatif kolaboratif yang melatih kecerdasan emosional, budi pekerti, dan keterampilan 
+    sosial anak melalui interaksi langsung dengan orang tua di era digital..</p>
+    <p>Dimulai <time datetime="2026-09-21">22 September 2026</time>.</p>
+  </article>
+</section>
+
+<section id="tanya-jawab">
+  <h2>Tanya jawab</h2>
+  <details>
+    <summary>Bahasa pemrograman apa yang paling anda kuasai?</summary>
+    <p>saat ini saya masih belajar, tetapi saya cukup menguasai bahasa pemrograman Python dan Java.</p>
+  </details>
+  <details>
+    <summary>Proyek apa saja yang pernah Anda buat selama kuliah?</summary>
+    <p>Saya telah mengerjakan beberapa proyek selama kuliah, seperti pembuatan halaman web untuk kelas 
+      terbuka, desain UI/UX menggunakan Figma, dan pengembangan aplikasi desktop berbasis Java.
+      Anda bisa melihat kode dan detailnya di menu Portfolio atau akun GitHub saya.</p>
+  </details>
+</section>
+
+    <section id="kontak">
+      <h2>Hubungi saya</h2>
+      <p>Isi formulir berikut. Semua kolom bertanda wajib harus diisi.</p>
+
+      <form action="#" method="post">
+        <fieldset>
+          <legend>Data pengirim</legend>
+
+          <p>
+            <label for="nama">Nama lengkap</label>
+            <input id="nama" name="nama" type="text"
+                   autocomplete="name" required>
+          </p>
+
+          <p>
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email"
+                   autocomplete="email" required>
+          </p>
+
+          <p>
+            <label for="nim">NIM</label>
+            <!-- ISI 8 — ganti angka di dalam pattern dengan NIM Anda sendiri. -->
+            <input id="nim" name="nim" type="text" inputmode="numeric"
+                   pattern="[0-9]{8}" aria-describedby="nim-bantuan" required>
+            <span id="nim-bantuan">Delapan digit angka, contoh 105230102.</span>
+          </p>
+
+          <p>
+            <label for="pesan">Pesan</label>
+            <textarea id="pesan" name="pesan" rows="4" required></textarea>
+          </p>
+
+          <button type="submit">Kirim</button>
+        </fieldset>
+      </form>
+    </section>
+
+    <!-- STRUKTUR TAMBAHAN (Lembar B.3) — minimal tiga bagian baru di sini,
+         sebelum tag penutup </main>. Wajib: satu <h2> per bagian, atribut id
+         yang belum terpakai, elemen semantik yang berbeda satu sama lain, dan
+         gaya memakai token yang sama. Tiga section di atas JANGAN diubah. -->
+
+  </main>
+
+  <footer class="kaki">
+    <!-- ISI 9 — nama, NIM, tahun. -->
+    <p>Fathin Nishrina · 25523256 · <time datetime="2026">2026</time></p>
+  </footer>
+</body>
+</html>
