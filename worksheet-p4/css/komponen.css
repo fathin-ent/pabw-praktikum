@@ -76,3 +76,39 @@ fieldset textarea {
 fieldset button {
   margin-left: 180px;
 }
+
+/* Styling Tabel Minimalis & Soft */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--space-4, 1rem) 0;
+  background-color: transparent;
+}
+
+caption {
+  font-weight: bold;
+  text-align: left;
+  margin-bottom: 0.75rem;
+  color: var(--color-fg, #362D2B);
+}
+
+th, td {
+  padding: 0.75rem 0.5rem;
+  text-align: left;
+  border-bottom: 1px solid var(--color-border, #B8AD9F);
+  color: var(--color-fg, #362D2B);
+}
+
+th {
+  background-color: transparent;
+  color: var(--color-primary, #8F365D);
+  font-weight: 700;
+  border-bottom: 2px solid var(--color-primary, #8F365D);
+}
+
+/* Kolom paling kiri (th scope="row") biar nggak pakai background khusus */
+tbody th {
+  background-color: transparent;
+  color: var(--color-fg, #362D2B);
+  font-weight: 600;
+}
