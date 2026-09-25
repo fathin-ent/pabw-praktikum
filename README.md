@@ -66,3 +66,4 @@ Alasan memilih arah ini: Kesan Profesional dan Hangat
 3. memperjelas langkah-langkah yang saya kurang paham
 4. menyelesaikan error
 5. memberikan color hex yang saya mau
+6. merapihkan tabel dan kontak melalui css
