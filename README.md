@@ -1,32 +1,28 @@
 # PABW — Fathin Nishrina Nurul Auliya — 25523256
 
-Repo ini memuat pekerjaan mata kuliah Pengembangan Aplikasi Berbasis Web, 
-satu folder untuk setiap pertemuan.
+## Pertemuan 4 — Halaman profil 
 
-## Pertemuan 4 — Halaman profil saya
+Topik halaman: profil pribadi.
 
-Topik halaman: profil pribadi saya.
-
-- Judul halaman: fathinnish
-- Deskripsi: Halo halo selamat datang di website profile saya! perkenalkan nama saya Fathin Nishrina Nurul Auliya, seorang mahasiswi di 
-Universitas Islam Indonesia dengan jurusan Informatika. Website ini..
-- Tautan navigasi: about me, some of my work, contact me!
-- Bagian utama: about me, some of my work, contact me!
-- Bagian tambahan: skills, worked on, QnA
+- Judul halaman: Fathin Nishrina Nurul Auliya
+- Deskripsi: Halo halo selamat datang di website profile saya! perkenalkan nama saya Fathin Nishrina Nurul Auliya, seorang mahasiswi di Universitas Islam Indonesia dengan jurusan Informatika. Saya berasal dari Kota Militer yaitu Cimahi, Jawa Barat. Website ini, hasil dari yang sedang saya pelajari, dibuat untuk memperkenalkan diri saya dan karya-karya yang telah saya kerjakan selama berkuliah di Universitas Islam Indonesia.
+- Tautan navigasi: Tentang Saya, Karya IT, Sedang Dikerjakan, Galeri Karya, Tanya Jawab, Kontak
+- Bagian utama: Tentang saya, Karya IT, Hubungi saya
+- Bagian tambahan: Galeri karya, Sedang saya kerjakan, Tanya jawab 
 
 ### Arah visual halaman profil saya
 
 Arah visual: Cerah dan ringan
 
-- Warna utama:#875d55
-- Warna netral terang: #f3ead8
-- Warna netral gelap: #635e60 #e0cea7
+- Warna utama: #8F365D (marun / merah anggur tua)   
+- Warna netral terang: #EEE6DC (krem lembut)
+- Warna netral gelap: #362D2B (cokelat tua gelap) dan #B8AD9F (abu-abu/cokelat medium untuk border)
 - Ukuran huruf: isi 1rem, h1 2rem, h2 1.5rem
 - Jarak dasar antar elemen: 1rem
 - Radius sudut: 0.5rem
 - Bayangan: lembut, 0 2px 8px rgba(0,0,0,0.08)
 
-Alasan memilih arah ini: 
+Alasan memilih arah ini: Kesan Profesional dan Hangat
 
 ## Design token halaman profil
 
@@ -38,19 +34,35 @@ Alasan memilih arah ini:
 
 | Token | Nilai | Untuk apa |
 |---|---|---|
-| --color-bg | #f3ead8 | latar halaman |
-| --color-fg | #040619 | warna teks utama |
-| --color-surface | #e9f0f4 | latar kartu dan panel |
-| --color-border | #875d55 | garis pemisah dan tepi kotak |
-| --color-primary | #875d55 | tombol, tautan, penanda |
-| --color-danger | #ab070a | peringatan dan isian tidak sah |
-| --color-focus | #ffbdd5 | garis fokus papan ketik |
-| --radius-md | 0.5rem | sudut tombol dan kartu |
-| --space-4 | 1rem | jarak standar antar elemen |
+| --color-bg | #EEE6DC | latar halaman |
+| --color-fg | #362D2B | warna teks utama |
+| --color-surface | #F6F2F0 | latar kartu dan panel |
+| --color-border | #B8AD9F | garis pemisah dan tepi kotak |
+| --color-primary | #8F365D | tombol, tautan, penanda |
+| --color-danger | #8A0507 | peringatan dan isian tidak sah |
+| --color-focus | #362D2B | garis fokus papan ketik |
 
-Kriteria selesai saya: mengubah --color-primary di satu baris harus mengubah 
-warna tombol, tautan, judul, dan garis fokus.
+## Tujuan Struktur Tambahan Halaman Profil
+
+1. Galeri Karya (`<section id="galeri-karya">`)
+   - elemen : Menggunakan elemen `<section>`, `<figure>`, `<video>`, dan `<a>`
+   - untuk siapa : calon rekruter yang ingin melihat demonstrasi visual langsung dari proyek yang dibuat.
+   - menjawab : Bagaimana wujud nyata dari aplikasi yang pernah dikembangkan (seperti Demo Nexsis App dan Prototipe Figma).
+
+2. Sedang Dikerjakan (`<section id="sedang-dikerjakan">`)
+   - elemen : Menggunakan elemen `<section>`, `<article>`, dan `<time>`.
+   - untuk siapa : Pengunjung web, rekan tim, serta dosen pengampu.
+   - menjawab : Apa fokus kegiatan dan proyek pengembangan terkini yang sedang digarap serta kapan proyek tersebut dimulai[cite: 20].
+
+3. Tanya Jawab (`<section id="tanya-jawab">`)
+   - elemen : Menggunakan elemen interaktif `<details>` dan `<summary>`[cite: 20].
+   - untuk siapa : Pengunjung umum atau rekruter yang mencari informasi cepat[cite: 20].
+   - menjawab : Pertanyaan umum seputar keahlian bahasa pemrograman dan pengalaman membuat proyek selama masa perkuliahan.
+
 
 ## Catatan penggunaan AI
-1. template README
+1. template dan mengisi README
 2. cara penggunaan GitHub
+3. memperjelas langkah-langkah yang saya kurang paham
+4. menyelesaikan error
+5. memberikan color hex yang saya mau
