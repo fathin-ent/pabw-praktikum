@@ -67,3 +67,31 @@ Alasan memilih arah ini: Kesan Profesional dan Hangat
 4. menyelesaikan error
 5. memberikan color hex yang saya mau
 6. merapihkan tabel dan kontak melalui css
+
+## Pertemuan 5 — Tata letak: flexbox dan grid
+
+### Sketsa kerangka halaman
+
+| Bagian halaman | Peran | Nilai yang saya pakai |
+|---|---|---|
+| Baris pertama | Kepala halaman: logo, judul, menu | auto (tinggi mengikuti isi) |
+| Baris kedua | Isi: sidebar dan konten | 1fr (mengisi sisa tinggi) |
+| Baris ketiga | Kaki halaman | auto (tinggi mengikuti isi) |
+| Kolom isi | Sidebar tetap, konten lentur | 16rem 1fr (sidebar tetap) |
+
+### Sumbu dan arah
+
+| Komponen | Arah | Sumbu utama | Sumbu silang |
+|---|---|---|---|
+| Navbar | baris | horizontal | vertikal |
+| Baris tombol pada kartu | baris | horizontal | vertikal |
+| Daftar menu samping | kolom | vertikal | horizontal |
+
+### menentukan flex/grid
+
+| Bagian | Pilihan | Alasan |
+|---|---|---|
+| Kepala halaman | flex | Isinya satu baris sejajar |
+| Isi dua kolom | grid | Lebar kolom ditentukan dari wadah, bukan dari isinya. |
+| Galeri kartu | grid | Kolom otomatis menyesuaikan lebar layar dengan auto-fit. |
+| Isi di dalam satu kartu | flex | Isinya berjajar dari atas ke bawah. |
