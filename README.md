@@ -111,6 +111,14 @@ repeat(auto-fit, minmax(16rem, 1fr)) memungkinkan jumlah kolom galeri menyesuaik
 - memberi izin menyusut, sehingga teks membungkus alih-alih melebarkan kolom.
 Kesimpulan pengecekan : tidak ada elemen yang melewati tepi kanan, tidak ada scroll horizontal muncul. Perbaikan min-width: 0 dari E.2 sudah bekerja.
 
+### Hasil pengecekan
+masih ada margin di komponen.css
+
+## Catatan penggunaan AI
+1. penulisan html untuk css nya
+2. cara penggunaan git hub lewat terminal
+3. memperbaiki kode
+4. memperjelas langkah-langkah yang saya kurang paham
 
   
 
