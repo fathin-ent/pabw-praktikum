@@ -103,24 +103,14 @@ repeat(auto-fit, minmax(16rem, 1fr)) memungkinkan jumlah kolom galeri menyesuaik
 ### Penempatan span dan area bernama
 | Blok | Cara | Potongan Kode |
 |---|---|---|
-| Kartu video di galeri karya| span | .galeri li:first-child {
-  grid-column: span 2;   /* kartu video lebih lebar dari kartu lain */
-}
-<img width="468" height="52" alt="image" src="https://github.com/user-attachments/assets/4dbe536b-115e-4d1c-8072-6ad8a0a56f5f" />
-|
-| Kerangka halaman (page)| area bernama | .page {
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  grid-template-areas:
-    "kepala"
-    "isi"
-    "kaki";
-  min-height: 100dvh;
-}
+| Kartu video di galeri karya| span | .galeri li:first-child {..|
+| Kerangka halaman (page)| area bernama | .page {.. |
 
-.page > header { grid-area: kepala; }
-.page > main   { grid-area: isi; }
-.page > footer { grid-area: kaki; }
-<img width="468" height="192" alt="image" src="https://github.com/user-attachments/assets/cd750249-bff2-4e61-859a-3f90d5484e0b" />
- |
+### Pengecekan tinggi kartu dan isi panjang mendorong kolom
+- memasukkan tinggi minimum agar tinggi kartu mengikuti panjang isinya.
+- memberi izin menyusut, sehingga teks membungkus alih-alih melebarkan kolom.
+Kesimpulan pengecekan : tidak ada elemen yang melewati tepi kanan, tidak ada scroll horizontal muncul. Perbaikan min-width: 0 dari E.2 sudah bekerja.
+
+
+  
 
