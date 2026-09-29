@@ -100,5 +100,17 @@ Alasan memilih arah ini: Kesan Profesional dan Hangat
 Pada bagian komponen, digunakan CSS Grid untuk membuat galeri yang adaptif dan Flexbox untuk mengatur isi di dalam kartu. Penggunaan
 repeat(auto-fit, minmax(16rem, 1fr)) memungkinkan jumlah kolom galeri menyesuaikan ukuran layar tanpa perlu membuat aturan media query tambahan.
 
+### Penempatan span dan area bernama
+| Blok | Cara | Potongan Kode |
+|---|---|---|
+| Kartu video di galeri karya| span | .galeri li:first-child {..|
+| Kerangka halaman (page)| area bernama | .page {.. |
 
+### Pengecekan tinggi kartu dan isi panjang mendorong kolom
+- memasukkan tinggi minimum agar tinggi kartu mengikuti panjang isinya.
+- memberi izin menyusut, sehingga teks membungkus alih-alih melebarkan kolom.
+Kesimpulan pengecekan : tidak ada elemen yang melewati tepi kanan, tidak ada scroll horizontal muncul. Perbaikan min-width: 0 dari E.2 sudah bekerja.
+
+
+  
 
