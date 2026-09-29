@@ -95,3 +95,10 @@ Alasan memilih arah ini: Kesan Profesional dan Hangat
 | Isi dua kolom | grid | Lebar kolom ditentukan dari wadah, bukan dari isinya. |
 | Galeri kartu | grid | Kolom otomatis menyesuaikan lebar layar dengan auto-fit. |
 | Isi di dalam satu kartu | flex | Isinya berjajar dari atas ke bawah. |
+
+### memasukkan css galeri adaptif dan isi kartu
+Pada bagian komponen, digunakan CSS Grid untuk membuat galeri yang adaptif dan Flexbox untuk mengatur isi di dalam kartu. Penggunaan
+repeat(auto-fit, minmax(16rem, 1fr)) memungkinkan jumlah kolom galeri menyesuaikan ukuran layar tanpa perlu membuat aturan media query tambahan.
+
+
+
