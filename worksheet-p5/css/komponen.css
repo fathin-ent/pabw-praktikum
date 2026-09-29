@@ -149,3 +149,16 @@ tbody th {
   max-width: 100%;
   height: auto;
 }
+
+.galeri li:first-child {
+  grid-column: span 2;   /* kartu video lebih lebar dari kartu lain */
+}
+
+.galeri .kartu {
+  display: grid;
+  align-content: start;
+  min-height: 14rem;
+}
+
+.kartu__isi { min-width: 0; }
+.kartu__judul { overflow-wrap: anywhere; }
