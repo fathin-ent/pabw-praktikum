@@ -1,4 +1,4 @@
-<img width="478" height="39" alt="image" src="https://github.com/user-attachments/assets/ef63a788-c6bc-4907-92d8-4e5454e55148" /><img width="468" height="23" alt="image" src="https://github.com/user-attachments/assets/d0488aad-fd1d-4a0d-800d-a9f984596709" /><img width="468" height="58" alt="image" src="https://github.com/user-attachments/assets/50aeeb35-57ad-40d8-abbc-312b0ea944bc" /># PABW — Fathin Nishrina Nurul Auliya — 25523256
+# PABW — Fathin Nishrina Nurul Auliya — 25523256
 
 ## Pertemuan 4 — Halaman profil 
 
@@ -124,12 +124,16 @@ masih ada margin di komponen.css
 
 ### A.	Pasang viewport dan cari lebar tetap
 - Baris meta viewport, dengan nilai :
-  | Nilai | artinya |
-  |---|---|---|
-  | width=device-width| lebar halaman mengikuti lebar layar perangkat|
-  | initial-scale=1.0| perbesaran awal memakai ukuran asli |
+| Nilai | artinya |
+|---|---|---|
+| width=device-width| lebar halaman mengikuti lebar layar perangkat|
+| initial-scale=1.0| perbesaran awal memakai ukuran asli |
 - Menentukan elemen ke lebar yang tetap
   komponen.css fieldset button : margin-left: 180px ->	margin-left: 10rem
+
+### B. Gaya dasar untuk layar sempit
+1. menambahkan responsif.css
+2. tambahkan class baru di profil.html, mengubah jadi <div class="isi content"> dan <ul class="galeri grid"> agar tingkat kekhususannya (specificity) sama.
 
   
 
