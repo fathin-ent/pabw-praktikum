@@ -120,5 +120,30 @@ masih ada margin di komponen.css
 3. memperbaiki kode
 4. memperjelas langkah-langkah yang saya kurang paham
 
+## Pertemuan 6 - Responsif Mobile-First
+
+### A.	Pasang viewport dan cari lebar tetap
+- Baris meta viewport, dengan nilai :
+| Nilai | artinya |
+|---|---|---|
+| width=device-width| lebar halaman mengikuti lebar layar perangkat|
+| initial-scale=1.0| perbesaran awal memakai ukuran asli |
+- Menentukan elemen ke lebar yang tetap
+  komponen.css fieldset button : margin-left: 180px ->	margin-left: 10rem
+
+### B. Gaya dasar untuk layar sempit
+1. menambahkan responsif.css
+2. tambahkan class baru di profil.html, mengubah jadi <div class="isi content"> dan <ul class="galeri grid"> agar tingkat kekhususannya (specificity) sama.
+
+### C. Tambah 2 titik henti
+- Titik henti pertama menambah kolom pada galeri, titik henti kedua menyandingkan sidebar dengan konten. Keduanya ditulis sebagai tambahan, sehingga gaya dasar untuk layar sempit tetap berlaku.
+- keputusan titik henti saya:
+  1. 48 rem di galeri dari 1 kolom -> 2 kolom, karena Di lebar ini (~768px, ukuran umum tablet) ruang sudah cukup menampung dua kartu berdampingan
+  2. 60rem, sidebar berdampingan dengan konten, karena masih cukup lebar untuk membaca konten dengan nyaman
+
+ 
+
+
+
   
 
