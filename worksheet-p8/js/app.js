@@ -23,3 +23,21 @@ const formatKeahlian = (daftar) => daftar.join(" · ");
 console.log(buatPerkenalan(profil));
 console.log(formatKeahlian(profil.keahlian));
 
+const daftarProyek = [
+  { judul: "Halaman Profil", tahun: 2026, selesai: true },
+  { judul: "Katalog Produk", tahun: 2026, selesai: false },
+];
+
+// Yang harus tercetak di Console
+console.table(profil.keahlian);
+console.table(daftarProyek);
+
+const selesai = daftarProyek.filter((proyek) => proyek.selesai);
+console.table(selesai);
+
+const katalog = daftarProyek.find((proyek) => proyek.judul === "Katalog Produk");
+console.log(katalog);
+
+console.log(daftarProyek.map((p) => p.judul).length === daftarProyek.length); // true
+const urut = [...daftarProyek].sort((a, b) => a.judul.localeCompare(b.judul));
+console.log(daftarProyek[0].judul); // urutan asli tidak berubah
