@@ -1,4 +1,4 @@
-<img width="468" height="58" alt="image" src="https://github.com/user-attachments/assets/9147f4e9-cfef-4b8b-ace8-109ea2f16502" /># PABW — Fathin Nishrina Nurul Auliya — 25523256
+# PABW — Fathin Nishrina Nurul Auliya — 25523256
 
 ## Pertemuan 4 — Halaman profil 
 
@@ -144,6 +144,79 @@ masih ada margin di komponen.css
 ### D. Gambar, Tabel, dan Teks
 Gambar dibatasi dengan max-width 100%, bukan diberi lebar tetap. Tabel lebar diberi wadah yang dapat digulir sendiri. Ukuran teks memakai rem supaya ikut membesar saat pengguna memperbesar huruf.
 
+## Pertemuan 8 - Membuat Halaman Profil yang Datanya Bergerak
+
+### A. Hubungkan skrip ke halaman
+Tulis tepat satu baris <script> sebelum </body>, <script type="module" src="js/app.js"></script>. 
+  1. type = "module" -> Menyalakan aturan modul: nama variabel tidak bocor ke jendela peramban, dan import/export bisa dipakai
+  2. src="js/app.js" -> Menunjuk berkas skrip yang Anda tulis, relatif terhadap profil.html
+  3. Letak sebelum <body> -> Elemen halaman sudah ada saat skrip membaca DOM
+
+### B. Data profil yang jadi variable
+
+Pakai const bila nilai itu tidak akan ditunjuk ulang; pakai let hanya bila Anda memang akan mengubahnya. 
+
+Template literal : menyusun kalimat dari nilai 
+Untuk menyambung teks dengan tanda + cepat, Template literal memakai tanda petik miring (backtick) dan menaruh nilai di dalam ${ } 
+
+| data | nama variable | isi |
+|---|---|---|
+| Nama lengkap | profil.nama | Fathin Nishrina Nurul Auliya |
+| Kalimat peran | profil.peran | Mahasiswa Informatika yang belajar front-end |
+| Daftar keahlian | Profil.keahlian | [“HTML”, “CSS”, “JavaSript” ] | 
+| Satu nilai angka yang dipakai | jumlahProyek | 3 |
+
+## C. dua fungsi murni
+
+### `buatPerkenalan({ nama, peran })`
+- Bentuk: deklarasi `function`
+- Parameter: satu objek berisi `nama` dan `peran`
+- Return: teks perkenalan, contoh `"Ayu — mahasiswa"`
+
+### `formatKeahlian(daftar)`
+- Bentuk: arrow function
+- Parameter: array keahlian
+- Return: satu baris teks, contoh `"HTML · CSS · JavaScript"`
+
+### Kenapa keduanya fungsi murni
+- Hasilnya hanya bergantung pada argumen.
+- Tidak mengubah variabel di luar fungsi dan tidak memanggil `console.log` di dalamnya.
+- Dipanggil dua kali dengan argumen sama, hasilnya sama.
+
+### Hasil uji di Console
+| Pemanggilan | Hasil |
+|---|---|
+| `buatPerkenalan({ nama: "Ayu", peran: "mahasiswa" })` | Ayu — mahasiswa |
+| `buatPerkenalan({ nama: "Budi", peran: "desainer" })` | Budi — desainer |
+| `formatKeahlian(["Git", "Figma"])` | Git · Figma |
+
+## D. data halaman jadi array of object
+
+### Data yang dipakai
+- profil : object berisi nama, peran, dan keahlian (array teks).
+- daftarProyek : array of object, setiap isinya punya judul, tahun, dan selesai.
+
+### Method array yang dipakai
+| Method | Dikembalikan | Dipakai di proyek ini untuk |
+|---|---|---|
+| filter | Array baru, bisa lebih pendek | Menyaring proyek yang selesai |
+| find | Satu isi atau undefined | Mengambil proyek "Katalog Produk" |
+| map | Array baru, panjang sama | Mengambil daftar judul proyek |
+
+## E. membaca galat
+
+### Cara saya membaca pesan galat
+Dari baris pertama pesan: apa yang salah, di berkas mana, baris berapa.
+Alat yang dipakai: `console.log`, `console.table`, `console.error`, dan breakpoint di DevTools → Sources.
+
+### Catatan galat yang saya temui
+| Pesan galat | Baris | Sebabnya | Yang saya ubah |
+|---|---|---|---|
+| Uncaught ReferenceError: profil is not defined | VM162:1 | Variabel di dalam module tidak bisa diakses dari Console | Pindahkan pemanggilan ke app.js |
+
+## Catatan penggunaan AI
+1. memperjelas langkah-langkah yang saya kurang paham
+2. memberikan saran isi README untuk beberapa bagian
 
 
  
