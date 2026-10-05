@@ -1,4 +1,4 @@
-# PABW — Fathin Nishrina Nurul Auliya — 25523256
+<img width="468" height="58" alt="image" src="https://github.com/user-attachments/assets/9147f4e9-cfef-4b8b-ace8-109ea2f16502" /># PABW — Fathin Nishrina Nurul Auliya — 25523256
 
 ## Pertemuan 4 — Halaman profil 
 
@@ -140,6 +140,11 @@ masih ada margin di komponen.css
 - keputusan titik henti saya:
   1. 48 rem di galeri dari 1 kolom -> 2 kolom, karena Di lebar ini (~768px, ukuran umum tablet) ruang sudah cukup menampung dua kartu berdampingan
   2. 60rem, sidebar berdampingan dengan konten, karena masih cukup lebar untuk membaca konten dengan nyaman
+
+### D. Gambar, Tabel, dan Teks
+Gambar dibatasi dengan max-width 100%, bukan diberi lebar tetap. Tabel lebar diberi wadah yang dapat digulir sendiri. Ukuran teks memakai rem supaya ikut membesar saat pengguna memperbesar huruf.
+
+
 
  
 
