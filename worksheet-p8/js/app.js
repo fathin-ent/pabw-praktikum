@@ -38,6 +38,3 @@ console.table(selesai);
 const katalog = daftarProyek.find((proyek) => proyek.judul === "Katalog Produk");
 console.log(katalog);
 
-console.log(daftarProyek.map((p) => p.judul).length === daftarProyek.length); // true
-const urut = [...daftarProyek].sort((a, b) => a.judul.localeCompare(b.judul));
-console.log(daftarProyek[0].judul); // urutan asli tidak berubah
