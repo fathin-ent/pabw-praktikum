@@ -38,3 +38,10 @@ console.table(selesai);
 const katalog = daftarProyek.find((proyek) => proyek.judul === "Katalog Produk");
 console.log(katalog);
 
+const judulProyek = daftarProyek.map((proyek) => proyek.judul);
+console.table(judulProyek);
+
+const urutTerbalik = [...daftarProyek].sort((a, b) => b.judul.localeCompare(a.judul));
+console.table(urutTerbalik);
+
+console.log(daftarProyek[0].judul); // data asli tetap "Halaman Profil"
