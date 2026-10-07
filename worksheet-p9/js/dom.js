@@ -1,10 +1,19 @@
-import { profil, daftarProyek } from "./app.js";
+import { daftarProyek } from "./app.js";
 
-const daftar = document.querySelector("#daftar");
-const filter = document.querySelector("#filter");
-const pesanKosong = document.querySelector("#pesan-kosong");
-const form = document.querySelector("form"); // ganti dengan id form Anda
+const wadah = document.querySelector("#daftar");
+const kosong = document.querySelector("#pesan-kosong");
 
-console.log(daftar, filter, pesanKosong, form);
-console.log(document.querySelectorAll("#filter button"));
-console.log(Array.from(document.querySelectorAll("#filter button")).map((t) => t.textContent));
+function render(daftar) {
+  // Baris WAJIB: Kosongkan dulu isi wadah sebelum diisi data baru
+  wadah.textContent = ""; 
+function buatKartu(proyek) {
+  const li = document.createElement("li");
+  li.className = "kartu";
+  li.textContent = proyek.judul;   // teks, bukan HTML
+  return li;
+}
+
+daftarProyek.forEach((proyek) => wadah.append(buatKartu(proyek)));
+}
+
+render(daftarProyek);
