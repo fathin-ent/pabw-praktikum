@@ -1,6 +1,6 @@
-import "./dom.js";
 
-const profil = {
+
+export const profil = {
   nama: "Fathin Nishrina Nurul Auliya",
   peran: "Mahasiswa Informatika yang belajar front-end",
   keahlian: ["HTML", "CSS", "JavaScript"],
@@ -25,7 +25,7 @@ const formatKeahlian = (daftar) => daftar.join(" · ");
 console.log(buatPerkenalan(profil));
 console.log(formatKeahlian(profil.keahlian));
 
-const daftarProyek = [
+export const daftarProyek = [
   { judul: "Halaman Profil", tahun: 2026, selesai: true },
   { judul: "Katalog Produk", tahun: 2026, selesai: false },
 ];
