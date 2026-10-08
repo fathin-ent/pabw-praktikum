@@ -26,8 +26,18 @@ console.log(buatPerkenalan(profil));
 console.log(formatKeahlian(profil.keahlian));
 
 export const daftarProyek = [
-  { judul: "Halaman Profil", tahun: 2026, selesai: true },
-  { judul: "Katalog Produk", tahun: 2026, selesai: false },
+  {
+    judul: "Halaman Profil",
+    tahun: 2026,
+    selesai: false,
+    kategori: "web"
+  },
+  {
+    judul: "Website Media Komunikasi",
+    tahun: 2026,
+    selesai: false,
+    kategori: "web"
+  }
 ];
 
 // Yang harus tercetak di Console
