@@ -12,9 +12,19 @@ function buatKartu(proyek) {
 }
 
 function render(daftar) {
+  // 1. Kosongkan wadah terlebih dahulu
   wadah.textContent = "";
+
+  // 2. Periksa keadaan kosong
+  if (daftar.length === 0) {
+    kosong.hidden = false;
+    return; // Hentikan eksekusi agar tidak lanjut ke foreach
+  }
+
+  kosong.hidden = true;
+
+  // 3. Isi ulang wadah dengan daftar kartu
   daftar.forEach((proyek) => wadah.append(buatKartu(proyek)));
-  kosong.hidden = daftar.length > 0;
 }
 
 function tandaiTombolAktif(tombolAktif) {
