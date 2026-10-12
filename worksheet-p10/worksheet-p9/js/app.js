@@ -57,3 +57,19 @@ const urutTerbalik = [...daftarProyek].sort((a, b) => b.judul.localeCompare(a.ju
 console.table(urutTerbalik);
 
 console.log(daftarProyek[0].judul); // data asli tetap "Halaman Profil"
+
+import { ambilNotisia } from "./api.js";
+
+async function mulai() {
+  const pesan = document.querySelector("#pesan-galat");
+  try {
+    const data = await ambilNotisia();
+    console.log("jumlah data", data.length);
+    pesan.hidden = true;
+  } catch (galat) {
+    pesan.textContent = "Data gagal dimuat: " + galat.message;
+    pesan.hidden = false;
+  }
+}
+
+mulai();
