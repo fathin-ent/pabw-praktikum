@@ -65,6 +65,15 @@ async function mulai() {
   try {
     const data = await ambilNotisia();
     console.log("jumlah data", data.length);
+    console.log(data);
+    console.log(data[0]);
+    console.log(data[0].title);
+
+    // Langkah 4
+    console.log(data[0].id);
+    console.log(data[0].title);
+    console.log(data[0].body);
+
     pesan.hidden = true;
   } catch (galat) {
     pesan.textContent = "Data gagal dimuat: " + galat.message;
