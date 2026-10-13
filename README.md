@@ -1,4 +1,4 @@
-<img width="468" height="19" alt="image" src="https://github.com/user-attachments/assets/30045eb6-9119-4a1b-bdf9-3691a5419e5b" /># PABW — Fathin Nishrina Nurul Auliya — 25523256
+# PABW — Fathin Nishrina Nurul Auliya — 25523256
 
 ## Pertemuan 4 — Halaman profil 
 
@@ -166,61 +166,61 @@ Untuk menyambung teks dengan tanda + cepat, Template literal memakai tanda petik
 | Daftar keahlian | Profil.keahlian | [“HTML”, “CSS”, “JavaSript” ] | 
 | Satu nilai angka yang dipakai | jumlahProyek | 3 |
 
-## C. dua fungsi murni
+### C. dua fungsi murni
 
-### `buatPerkenalan({ nama, peran })`
+#### `buatPerkenalan({ nama, peran })`
 - Bentuk: deklarasi `function`
 - Parameter: satu objek berisi `nama` dan `peran`
 - Return: teks perkenalan, contoh `"Ayu — mahasiswa"`
 
-### `formatKeahlian(daftar)`
+#### `formatKeahlian(daftar)`
 - Bentuk: arrow function
 - Parameter: array keahlian
 - Return: satu baris teks, contoh `"HTML · CSS · JavaScript"`
 
-### Kenapa keduanya fungsi murni
+#### Kenapa keduanya fungsi murni
 - Hasilnya hanya bergantung pada argumen.
 - Tidak mengubah variabel di luar fungsi dan tidak memanggil `console.log` di dalamnya.
 - Dipanggil dua kali dengan argumen sama, hasilnya sama.
 
-### Hasil uji di Console
+##### Hasil uji di Console
 | Pemanggilan | Hasil |
 |---|---|
 | `buatPerkenalan({ nama: "Ayu", peran: "mahasiswa" })` | Ayu — mahasiswa |
 | `buatPerkenalan({ nama: "Budi", peran: "desainer" })` | Budi — desainer |
 | `formatKeahlian(["Git", "Figma"])` | Git · Figma |
 
-## D. data halaman jadi array of object
+### D. data halaman jadi array of object
 
-### Data yang dipakai
+ Data yang dipakai
 - profil : object berisi nama, peran, dan keahlian (array teks).
 - daftarProyek : array of object, setiap isinya punya judul, tahun, dan selesai.
 
-### Method array yang dipakai
+ Method array yang dipakai
 | Method | Dikembalikan | Dipakai di proyek ini untuk |
 |---|---|---|
 | filter | Array baru, bisa lebih pendek | Menyaring proyek yang selesai |
 | find | Satu isi atau undefined | Mengambil proyek "Katalog Produk" |
 | map | Array baru, panjang sama | Mengambil daftar judul proyek |
 
-## E. membaca galat
+### E. membaca galat
 
-### Cara saya membaca pesan galat
+Cara saya membaca pesan galat :
 Dari baris pertama pesan: apa yang salah, di berkas mana, baris berapa.
 Alat yang dipakai: `console.log`, `console.table`, `console.error`, dan breakpoint di DevTools → Sources.
 
-### Catatan galat yang saya temui
+Catatan galat yang saya temui
 | Pesan galat | Baris | Sebabnya | Yang saya ubah |
 |---|---|---|---|
 | Uncaught ReferenceError: profil is not defined | VM162:1 | Variabel di dalam module tidak bisa diakses dari Console | Pindahkan pemanggilan ke app.js |
 
-## Catatan penggunaan AI
+### Catatan penggunaan AI
 1. memperjelas langkah-langkah yang saya kurang paham
 2. memberikan saran isi README untuk beberapa bagian
 
-# Worksheet P9 — DOM, Event, dan Interaktivitas
+## Worksheet P9 — DOM, Event, dan Interaktivitas
 
-## Lembar A — Memilih elemen
+### Lembar A — Memilih elemen
 - Wadah di `profil.html`: `ul#daftar` (daftar proyek), `div#filter` dengan tiga tombol `data-kategori` (semua, web, data), dan `p#pesan-kosong` yang disembunyikan dengan atribut `hidden`.
 - Nilai `data-kategori` pada tombol sama persis (huruf per huruf) dengan properti `kategori` pada setiap proyek di `app.js`.
 - `dom.js` dipisah dari `app.js` dan dimuat sesudahnya, keduanya `type="module"`. `app.js` meng-`export` data, `dom.js` meng-`import` data itu.
@@ -234,7 +234,7 @@ Alat yang dipakai: `console.log`, `console.table`, `console.error`, dan breakpoi
 | Pesan daftar kosong | `#pesan-kosong` | Muncul saat hasil filter kosong | `kosong` |
 | Form dan kolomnya | (isi id form saya) | Dibaca dan divalidasi (Lembar D) | `form` |
 
-## Lembar B — Menyusun elemen dari data
+### Lembar B — Menyusun elemen dari data
 - Setiap isi `daftarProyek` dibuat menjadi satu kartu `<li class="kartu">` lewat fungsi `buatKartu(proyek)`.
 - Teks diisi dengan `textContent`, bukan `innerHTML`, supaya isi data dianggap teks dan bukan HTML (menghindari XSS).
 - Kartu dimasukkan ke wadah dengan `append`.
@@ -247,29 +247,29 @@ Alat yang dipakai: `console.log`, `console.table`, `console.error`, dan breakpoi
 | Kartu paling atas | (isi, contoh: "Halaman Profil", sama dengan data pertama) |
 | Teks di dalam kartu | (isi, contoh: tampil sebagai teks biasa) |
 
-## Lembar C — Satu pendengar untuk semua tombol
+### Lembar C — Satu pendengar untuk semua tombol
 - Pendengar klik dipasang sekali di induk `#filter` (event delegation), bukan di tiap tombol.
 - `event.target.closest("button")` dipakai untuk memastikan yang diklik adalah tombol.
 - Kategori dibaca dari `tombol.dataset.kategori`, lalu data disaring dengan `filter`.
 - Tombol aktif ditandai dengan `classList.toggle("aktif", ...)`; tampilannya diatur di CSS.
 
-## D. Pola render dan validasi form
+### D. Pola render dan validasi form
 1. perbarui fungsi render di dom.js untuk mencegah pengulangan elemen
 2. memeriksa hasil kerja saya pada form, dan semuanya terpenuhi sesuai hasil yang benar ini pada bagian D.3
 
-## E. Membaca gejala bukan menebak
+### E. Membaca gejala bukan menebak
 tidak ada error dalam pengerjaan ini, adanya karena salah penulisan aja.
 | Gejala yang Dilihat | Sebabnya | Baris yang Diubah |
 | --- | --- | --- |
 | Daftar kosong tanpa penjelasan / pesan kosong tidak muncul | Karena salah penulisan antara _ dan – di dalam profil.html | Mengganti dari _ ke - |
 
-## Deklarasi Penggunaan AI
+### Deklarasi Penggunaan AI
 - Menjelaskan isi lembar A dan B dan urutan langkah pengerjaannya.
 - Memberi kerangka kode awal (`buatKartu`, `export`/`import`, pengosongan wadah) yang kemudian saya ketik, jalankan, dan periksa sendiri di Console.
 - Membantu membaca pesan galat dan menyusun kerangka README ini.
 - mengisi readme untuk bagian a-c karena yang awalnya saya isi sendiri tiba tiba hilang
 
-## Saya kerjakan sendiri:
+### Saya kerjakan sendiri:
 - Mengisi data profil dan proyek dengan data saya.
 - Menyesuaikan `id` dan `data-kategori` dengan `profil.html` saya.
 - Menjalankan halaman, memeriksa hasil di Console dan panel Elements, serta mengisi tabel hasil.
@@ -278,6 +278,21 @@ tidak ada error dalam pengerjaan ini, adanya karena salah penulisan aja.
 - Navigasi & Inspecting
 - Pengelolaan Git & GitHub
 - Penilaian & Refleksi
+
+## P.10 - JavaScript Asinkron: fetch, promise, dan JSON
+
+### A. panggilan pertama dan status balasan
+1. menetapkan alamat di satu tempat : membuat file api.js, menggunakan alamat API publik dan berbentuk daftar yang cocok dijadikan kartu dengan ketetapan memakai https, tanpa kunci akses, alamat hanya ditulis sekali di api.js
+2. menambahkan fungsi muat() di api.js, dengan tambahan kata export menurut saran AI
+3. satu baris pemanggil di app.js
+4.
+|Yang dicatat	| Nilai yang saya dapat|
+|---|---|
+|Alamat API yang saya pakai	|https://jsonplaceholder.typicode.com/posts|
+|Status balasan (200, 404, dan seterusnya)	|200|
+|Nilai respons.ok	|200OK|
+|Jenis isi (Content-Type)|	application/json; charset=utf-8|
+
 
 
  
