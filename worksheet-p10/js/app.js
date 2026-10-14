@@ -1,4 +1,4 @@
-
+import { ambilNotisia } from "./api.js";
 
 export const profil = {
   nama: "Fathin Nishrina Nurul Auliya",
@@ -57,3 +57,32 @@ const urutTerbalik = [...daftarProyek].sort((a, b) => b.judul.localeCompare(a.ju
 console.table(urutTerbalik);
 
 console.log(daftarProyek[0].judul); // data asli tetap "Halaman Profil"
+
+const wadah = document.querySelector('#daftar-notisia');
+
+function gambar(daftar) {
+  wadah.textContent = '';
+  daftar.forEach(function (n) {
+    const kartu = document.createElement('article');
+    const judul = document.createElement('h3');
+    judul.textContent = n.title;
+    kartu.appendChild(judul);
+    wadah.appendChild(kartu);
+  });
+}
+
+async function tampilkan() {
+  wadah.textContent = 'Memuat...';
+  try {
+    const daftar = await ambilNotisia();
+    if (daftar.length === 0) {
+      wadah.textContent = 'Belum ada notisia';
+      return;
+    }
+    gambar(daftar.slice(0, 5));
+  } catch (galat) {
+    wadah.textContent = 'Gagal memuat data: ' + galat.message;
+  }
+}
+
+tampilkan();
