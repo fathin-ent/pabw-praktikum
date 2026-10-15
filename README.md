@@ -304,8 +304,7 @@ Pekerjaan ini berfokus pada implementasi konsep JavaScript Asinkron (Async/Await
    * **Memuat (*Loading*)**: Menampilkan indikator "Memuat..." saat menunggu data.
    * **Berhasil (*Success*)**: Merender data postingan/notisia menjadi elemen kartu di HTML.
    * **Gagal (*Error*)**: Menampilkan pesan error jika terjadi galat jaringan atau HTTP status non-2xx.
-   * <img width="682" height="189" alt="Screenshot 2026-10-15 at 20 42 05" src="https://github.com/user-attachments/assets/65928253-9cae-4e6f-b192-f3561760f01a" />
-**Kosong (*Empty*)**: Menampilkan pesan "Belum ada notisia" jika balasan API berupa larik kosong (`[]`).
+* **Kosong (*Empty*)**: Menampilkan pesan "Belum ada notisia" jika balasan API berupa larik kosong (`[]`).
 
 ---
 
@@ -353,7 +352,7 @@ Bukti tangkapan layar untuk 4 kondisi antarmuka disimpan di dalam repositori:
 
 ---
 
-## 🤖 Deklarasi Penggunaan AI (AI Disclosure)
+## 🤖 Deklarasi Penggunaan AI 
 
 * **Bagian yang Dibantu AI**:
   * Penelusuran galat (*debugging*) untuk isu `.git/index.lock` dan penyesuaian penanganan `textContent` null pada elemen HTML.
@@ -361,7 +360,143 @@ Bukti tangkapan layar untuk 4 kondisi antarmuka disimpan di dalam repositori:
 * **Bagian yang Dikerjakan Mandiri**:
   * Seluruh struktur HTML (`profil.html`), perbaikan CSS, implementasi `async/await` pada `js/api.js`, pengisian jawaban serta analisis mandiri pada worksheet Pertemuan 10.
 
+## P 11 - modul, state, penyimpanan klien
+---
 
+## 📌 Deskripsi Pekerjaan & Refactoring Modul
+Pada tugas Pertemuan 11 ini, fokus utama adalah melakukan refactoring (pemecahan) berkas JavaScript monolithic menjadi modul-modul terpisah (*Single Responsibility Principle*), mengelola *state* terpusat, serta mengintegrasikan *data layer* dari Pertemuan 10 tanpa merusak fitur antarmuka yang ada.
+
+### Audit Berkas Awal
+* **`profil.html`**: Ada (248 baris)
+* **CSS (6 berkas)**: Ada (Base: 28, Komponen: 168, Layout: 61, Responsive: 23, Tema: 64, Tokens: 39)
+* **`js/app.js`**: Ada (59 baris awal, diekspansi untuk perakit modul)
+* **`js/dom.js`**: Ada (49 baris awal, dipilah untuk sentuhan DOM murni)
+* **`js/api.js`**: Dipertahankan dari Pertemuan 10 untuk menangani pemanggilan API (fetch & async/await).
+
+---
+
+## 🧩 Susunan & Tanggung Jawab Modul (`js/`)
+
+Aplikasi dipecah menjadi beberapa modul dengan pembagian tugas yang jelas:
+
+| Berkas Modul | Tanggung Jawab | Asal Pemindahan Kode |
+| :--- | :--- | :--- |
+| **`js/data.js`** | Data mentah dan fungsi murni pemformat (*pure functions*). | Objek `profil`, array `daftarProyek`, fungsi `buatPerkenalan()`, dan `formatKeahlian()` dari `app.js`. |
+| **`js/state.js`** | Objek *state* tunggal dan fungsi pengubahnya. | Pengelolaan keadaan filter kategori (`state = { kategori: "semua" }`), fungsi `ubahKategori()`, dan `proyekTerpilih()`. |
+| **`js/dom.js`** | Seluruh manipulasi DOM murni (pemilih, render elemen, pengelolaan kelas). | Fungsi `buatKartu()`, `render()`, `tandaiTombolAktif()`, dan penggambar `#daftar-notisia`. |
+| **`js/events.js`** | Pemasangan seluruh pendengar peristiwa (*event listeners*). | Pengelolaan blok `addEventListener("click", ...)` untuk filter kategori yang dipisahkan dari `dom.js`. |
+| **`js/api.js`** | Lapisan data luar (*API Fetcher*). | Fungsi `ambilNotisia()` dari Pertemuan 10 untuk mengambil data asinkron dari REST API. |
+| **`js/app.js`** | Perakitan utama (*App Entry Point*). | Mengimpor seluruh modul, memanggil `ambilNotisia()`, mengeksekusi render awal `render(state)`, dan mengaktifkan event listener. |
+
+---
+
+## 📊 Analisis Sentuhan DOM Sebelum Refactoring
+Sebelum dilakukan pemisahan modul, dihitung baris kode yang secara langsung melakukan manipulasi DOM (`querySelector`, `createElement`, `append`, `classList`, `textContent`):
+
+* **`js/app.js`**: 15 baris menyentuh DOM dari total 88 baris.
+* **`js/dom.js`**: 16 baris menyentuh DOM dari total 47 baris.
+
+---
+## 🛠️ Implementasi Modul & ES6 Import/Export
+
+### 1. Struktur Import & Export Modul (`js/`)
+Semua pemanggilan modul menggunakan jalur relatif yang diwakili oleh `./` dan wajib menggunakan ekstensi `.js`.
+
+* **`js/data.js`**: Menyimpan data mentah (`daftarProyek`, `profil`) dan fungsi murni pemformat (`buatPerkenalan`, `formatKeahlian`).
+* **`js/state.js`**: Menyimpan objek *state* terpusat dan fungsi pengubahnya (`state = { ... }`).
+* **`js/events.js`**: Menangani seluruh pemasangan *event listener* interaksi pengguna.
+* **`js/dom.js`**: Menangani manipulasi DOM, pemilih elemen, dan fungsi penggambar (*render*).
+* **`js/api.js`**: Lapisan data luar dari Pertemuan 10 yang menangani pemanggilan API asinkron (`fetch`).
+* **`js/app.js`**: Titik masuk utama aplikasi (*entry point*) yang merakit dan mengimpor modul lain.
+
+### 2. Penyesuaian `profil.html`
+Mengubah pemanggilan skrip menjadi modul ES6 agar peramban dapat mengenali sintaks `import`/`export`:
+```html
+<!-- profil.html -->
+<script type="module" src="js/app.js"></script>
+---
+## 💾 Lembar D — Halaman yang Mengingat Pilihan
+
+Bagian ini mendokumentasikan implementasi `localStorage` untuk menyimpan pilihan terakhir pengguna agar tetap bertahan meskipun halaman dimuat ulang (*refresh*) atau tab ditutup.
+
+---
+
+### D.1 Fungsi Utama `localStorage`
+
+| Perintah | Perannya | Kapan Dijalankan |
+| :--- | :--- | :--- |
+| `localStorage.setItem(...)` | Menyimpan teks dengan satu nama kunci | Sesudah keadaan berubah dan sebelum render |
+| `localStorage.getItem(...)` | Membaca kembali; `null` bila belum pernah disimpan | Sekali saja, saat halaman pertama dimuat |
+| `JSON.stringify(objek)` | Mengubah objek menjadi teks | Seluruh isi yang berupa objek atau array |
+| `JSON.parse(teks)` | Mengubah teks kembali menjadi objek | Segera sesudah membaca, dibungkus `try/catch` |
+| `localStorage.removeItem(...)` | Menghapus simpanan | Tombol atur ulang |
+
+---
+
+### D.2 Nilai Bawaan pada Kunjungan Pertama
+
+| Keadaan | Nilai Bawaan | Alasan |
+| :--- | :--- | :--- |
+| **Kategori Aktif** | `"semua"` | Pengunjung pertama harus melihat semua proyek, bukan daftar yang sudah tersaring atau kosong. |
+| **Urutan Tampilan** | `"asli"` | Mengikuti urutan di `data.js` dan tidak mengubah data apa pun. |
+
+---
+
+### D.3 Batas Penyimpanan Klien
+
+| Batas | Artinya | Akibatnya bagi Pekerjaan Anda |
+| :--- | :--- | :--- |
+| **Hanya teks** | Angka, objek, dan array harus diubah lebih dulu | Selalu lewat JSON sebelum disimpan |
+| **Sekitar 5 MB per alamat** | Batasnya per alamat, bukan per berkas | Simpan pilihan, bukan gambar atau data besar |
+| **Sinkron dan menghambat** | Membaca dan menulis menahan halaman sejenak | Jangan menyimpan pada setiap ketikan |
+| **Tidak terenkripsi** | Isinya bisa dibaca siapa pun yang memakai komputer itu | Jangan simpan token, kata sandi, atau data pribadi |
+| **Terikat alamat** | Simpanan satu alamat tidak terlihat oleh alamat lain | Simpanan hilang bila nomor port server lokal berubah |
+
+---
+
+### D.4 Evaluasi Data yang Disimpan dan Dibatasi
+
+| Keadaan | Disimpan? | Alasan |
+| :--- | :--- | :--- |
+| **Kategori aktif** | Ya | Pilihan kecil dan tidak sensitif, dan lebih nyaman kalau diingat saat halaman dibuka lagi. |
+| **Kata kunci pencarian** | Tidak | Bersifat sementara dan bisa berisi hal pribadi. Menyimpannya juga berarti menulis ke penyimpanan yang sinkron pada setiap ketikan. |
+| **Token atau data pribadi** | Tidak | Tidak terenkripsi dan bisa dibaca siapa pun. |
+---
+## 🛡️ Lembar E — Simpanan Bisa Rusak, Siapkan Jalan Pulang
+
+Bagian ini mendokumentasikan mekanisme penanganan kerusakan data pada penyimpanan lokal (`localStorage`) serta hasil pengujian langsung dari Console.
+
+---
+
+### E.1 Tiga Cara Simpanan Menjadi Rusak
+* **Simpanan Rusak / Null**: Dibungkus dengan `try/catch`. Jika isi simpanan bukan JSON yang sah (`JSON.parse` melempar galat), simpanan dibuang dan aplikasi beralih ke nilai bawaan.
+* **Versi Skema Lama**: Menyertakan variabel `VERSI` pada data simpanan. Jika versi simpanan di `localStorage` tidak cocok dengan versi aplikasi saat ini, simpanan dibuang via `localStorage.removeItem()`.
+* **Data Tergoda Disimpan**: Hanya menyimpan pilihan/tampilan interaktif, serta tidak menyimpan data pribadi atau kredensial sensitif.
+
+---
+
+### E.2 Penanganan Nomor Versi pada Fungsi `muat()`
+Fungsi `muat()` pada `js/state.js` dilengkapi pengecekan versi dan pembungkus galat agar aplikasi tidak mengalami *crash*:
+
+```javascript
+export function muat() {
+  try {
+    const isi = JSON.parse(localStorage.getItem(KUNCI));
+    if (isi?.versi !== VERSI) {
+      localStorage.removeItem(KUNCI); // buang versi lama
+      return null;
+    }
+    return isi;
+  } catch {
+    localStorage.removeItem(KUNCI); // buang isi rusak
+    return null;
+  }
+}
+---
+
+## 🤖 Deklarasi AI (AI Disclosure)
+* **Bagian yang Dibantu AI**: Penyusunan dokumentasi `README.md`, verifikasi struktur modul ES6 (`import`/`export`), dan pembagian tabel tanggung jawab berkas.
+* **Bagian yang Dikerjakan Mandiri**: Pemisahan kode JavaScript ke dalam masing-masing berkas modul (`data.js`, `state.js`, `dom.js`, `events.js`, `app.js`), pengujian di localhost server, dan pemastian fungsionalitas filter antarmuka.
 
  
 
