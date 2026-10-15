@@ -293,6 +293,74 @@ tidak ada error dalam pengerjaan ini, adanya karena salah penulisan aja.
 |Nilai respons.ok	|200OK|
 |Jenis isi (Content-Type)|	application/json; charset=utf-8|
 
+## 📌 Deskripsi Pekerjaan
+Pekerjaan ini berfokus pada implementasi konsep JavaScript Asinkron (Async/Await & Promise) untuk mengambil data dari REST API publik, mengurai data format JSON, serta memisahkan lapisan data (*Data Layer*) dari lapisan tampilan (*UI Layer*).
+
+### Fitur & Capaian Pembelajaran:
+1. **Pemisahan Lapisan Kode**: Menempatkan logika `fetch` di dalam berkas `js/api.js` dan mengekspor fungsi `ambilNotisia()`, sehingga `js/app.js` hanya memanggil fungsi tanpa menangani alamat API secara langsung.
+2. **Pemeriksaan Respon HTTP**: Memeriksa `respons.ok` sebelum membaca *body* untuk menangani galat status HTTP seperti `404` atau `500`.
+3. **Penanganan Galat Sempurna**: Menggunakan dua lapis `try/catch` untuk menangkap galat jaringan atau status HTTP gagal, lalu menampilkan pesan galat langsung ke halaman HTML (bukan sekadar di Console).
+4. **4 Keadaan Antarmuka (UI States)**:
+   * **Memuat (*Loading*)**: Menampilkan indikator "Memuat..." saat menunggu data.
+   * **Berhasil (*Success*)**: Merender data postingan/notisia menjadi elemen kartu di HTML.
+   * **Gagal (*Error*)**: Menampilkan pesan error jika terjadi galat jaringan atau HTTP status non-2xx.
+   * <img width="682" height="189" alt="Screenshot 2026-10-15 at 20 42 05" src="https://github.com/user-attachments/assets/65928253-9cae-4e6f-b192-f3561760f01a" />
+**Kosong (*Empty*)**: Menampilkan pesan "Belum ada notisia" jika balasan API berupa larik kosong (`[]`).
+
+---
+
+## 🌐 API & Peta Data
+
+* **Endpoint API**: `https://jsonplaceholder.typicode.com/posts`
+* **Status HTTP Normal**: `200 OK`
+* **Content-Type**: `application/json; charset=utf-8`
+
+### Struktur Data API
+| Nama Kunci (Key) | Tipe Data & Contoh | Cara Akses Kode |
+| :--- | :--- | :--- |
+| `data[0]` | Object `{ userId: 1, id: 1, title: "...", body: "..." }` | `data[0]` |
+| `data` | Array (100 item) | `data.forEach(...)` |
+| `title` | String | `item.title` (atau dipetakan sebagai judul notisia) |
+| `id` | Number | `item.id` |
+
+---
+
+## 🛠️ Kendala & Penanganan (Kasus Sulit)
+
+Selama proses pengerjaan, beberapa kendala teknis berhasil diidentifikasi dan ditangani:
+
+1. **Galat `TypeError: Cannot set properties of null` pada `app.js`**:
+   * *Penyebab*: Fungsi `mulai()` mencoba mengakses `#pesan-galat` yang tidak ada di HTML.
+   * *Solusi*: Menghapus fungsi `mulai()` dan memusatkan alur pengoperasian di fungsi `tampilkan()`.
+2. **Bentrok Penggambaran Kartu**:
+   * *Penyebab*: Fungsi `gambar()` menyasar kontainer `#daftar` yang bentrok dengan daftar proyek dari Pertemuan 9.
+   * *Solusi*: Mengubah target selector di DOM menjadi `#daftar-notisia`.
+3. **Penanganan Favicon 404**:
+   * *Penyebab*: Browser otomatis meminta `favicon.ico` yang tidak tersedia.
+   * *Solusi*: Menambahkan `<link rel="icon" href="data:,">` pada tag `<head>` di `profil.html`.
+4. **Masalah Git Lock & Push Rejected**:
+   * *Penyebab*: Adanya sisa file `.git/index.lock` dan repo GitHub yang memiliki commit lebih baru dibanding local repo.
+   * *Solusi*: Menghapus file lock dengan `rm -f .git/index.lock`, diikuti dengan `git pull --no-rebase origin main` sebelum melakukan `git push`.
+
+---
+
+## 📸 Bukti Keadaan Antarmuka (Screenshots)
+
+Bukti tangkapan layar untuk 4 kondisi antarmuka disimpan di dalam repositori:
+* `berhasil.png` — Menampilkan daftar notisia dari API dengan sukses.
+* `Gagal.png` — Menampilkan pesan error saat API diblokir atau alamat salah.
+* `Memuat…png` — Menampilkan indikator saat koneksi diperlambat (Network Throttling 3G).
+
+---
+
+## 🤖 Deklarasi Penggunaan AI (AI Disclosure)
+
+* **Bagian yang Dibantu AI**:
+  * Penelusuran galat (*debugging*) untuk isu `.git/index.lock` dan penyesuaian penanganan `textContent` null pada elemen HTML.
+  * Pembuatan kerangka dokumentasi `README.md`.
+* **Bagian yang Dikerjakan Mandiri**:
+  * Seluruh struktur HTML (`profil.html`), perbaikan CSS, implementasi `async/await` pada `js/api.js`, pengisian jawaban serta analisis mandiri pada worksheet Pertemuan 10.
+
 
 
  
