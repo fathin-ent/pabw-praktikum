@@ -1,8 +1,10 @@
-import { daftarProyek } from "./data.js";
+// dom.js — seluruh sentuhan ke halaman: pemilih, render, perubahan kelas.
+import { proyekTerpilih } from "./state.js";
 
-const wadah = document.querySelector("#daftar");
-const kosong = document.querySelector("#pesan-kosong");
-const barisFilter = document.querySelector("#filter");
+const wadahProyek = document.querySelector("#daftar");
+const pesanKosong = document.querySelector("#pesan-kosong");
+export const barisFilter = document.querySelector("#filter");
+const wadahNotisia = document.querySelector("#daftar-notisia");
 
 function buatKartu(proyek) {
   const li = document.createElement("li");
@@ -11,39 +13,51 @@ function buatKartu(proyek) {
   return li;
 }
 
-function render(daftar) {
-  // 1. Kosongkan wadah terlebih dahulu
-  wadah.textContent = "";
+function gambarProyek(daftar) {
+  wadahProyek.textContent = "";
 
-  // 2. Periksa keadaan kosong
   if (daftar.length === 0) {
-    kosong.hidden = false;
-    return; // Hentikan eksekusi agar tidak lanjut ke foreach
+    pesanKosong.hidden = false;
+    return;
   }
 
-  kosong.hidden = true;
-
-  // 3. Isi ulang wadah dengan daftar kartu
-  daftar.forEach((proyek) => wadah.append(buatKartu(proyek)));
+  pesanKosong.hidden = true;
+  daftar.forEach((proyek) => wadahProyek.append(buatKartu(proyek)));
 }
 
-function tandaiTombolAktif(tombolAktif) {
+function tandaiTombolAktif(kategori) {
   document.querySelectorAll("#filter button").forEach((tombol) => {
-    tombol.classList.toggle("aktif", tombol === tombolAktif);
+    tombol.classList.toggle("aktif", tombol.dataset.kategori === kategori);
   });
 }
 
-barisFilter.addEventListener("click", (event) => {
-  const tombol = event.target.closest("button");
-  if (!tombol) return;
+function gambarNotisia(state) {
+  wadahNotisia.textContent = "";
 
-  const kategori = tombol.dataset.kategori;
-  const terpilih = daftarProyek.filter(
-    (proyek) => kategori === "semua" || proyek.kategori === kategori
-  );
+  if (state.statusNotisia === "memuat") {
+    wadahNotisia.textContent = "Memuat...";
+    return;
+  }
+  if (state.statusNotisia === "galat") {
+    wadahNotisia.textContent = "Gagal memuat data: " + state.pesanGalat;
+    return;
+  }
+  if (state.notisia.length === 0) {
+    wadahNotisia.textContent = "Belum ada notisia";
+    return;
+  }
 
-  render(terpilih);
-  tandaiTombolAktif(tombol);
-});
+  state.notisia.slice(0, 5).forEach((n) => {
+    const kartu = document.createElement("article");
+    const judul = document.createElement("h3");
+    judul.textContent = n.title;
+    kartu.appendChild(judul);
+    wadahNotisia.appendChild(kartu);
+  });
+}
 
-render(daftarProyek);
+export function render(state) {
+  gambarProyek(proyekTerpilih(state));
+  tandaiTombolAktif(state.kategori);
+  gambarNotisia(state);
+}
