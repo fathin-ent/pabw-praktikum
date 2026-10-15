@@ -1,8 +1,8 @@
 // dom.js — seluruh sentuhan ke halaman: pemilih, render, perubahan kelas.
-import { proyekTerpilih } from "./state.js";
+// Berkas ini hanya MEMBACA state; tidak pernah mengubahnya.
 
-const wadahProyek = document.querySelector("#daftar");
-const pesanKosong = document.querySelector("#pesan-kosong");
+const wadah = document.querySelector("#daftar");
+const kosong = document.querySelector("#pesan-kosong");
 export const barisFilter = document.querySelector("#filter");
 const wadahNotisia = document.querySelector("#daftar-notisia");
 
@@ -13,21 +13,17 @@ function buatKartu(proyek) {
   return li;
 }
 
-function gambarProyek(daftar) {
-  wadahProyek.textContent = "";
-
-  if (daftar.length === 0) {
-    pesanKosong.hidden = false;
-    return;
-  }
-
-  pesanKosong.hidden = true;
-  daftar.forEach((proyek) => wadahProyek.append(buatKartu(proyek)));
+// Dulu menyaring di dalam pendengar klik P9; kini kategorinya dari state.
+function saring(state) {
+  return state.daftarProyek.filter(
+    (proyek) =>
+      state.kategoriAktif === "semua" || proyek.kategori === state.kategoriAktif
+  );
 }
 
-function tandaiTombolAktif(kategori) {
+function tandaiTombolAktif(state) {
   document.querySelectorAll("#filter button").forEach((tombol) => {
-    tombol.classList.toggle("aktif", tombol.dataset.kategori === kategori);
+    tombol.classList.toggle("aktif", tombol.dataset.kategori === state.kategoriAktif);
   });
 }
 
@@ -57,7 +53,16 @@ function gambarNotisia(state) {
 }
 
 export function render(state) {
-  gambarProyek(proyekTerpilih(state));
-  tandaiTombolAktif(state.kategori);
+  wadah.textContent = "";                    // 1. kosongkan
+
+  const tampil = saring(state);              // dari state, bukan argumen
+  if (tampil.length === 0) {                 // 2. keadaan kosong
+    kosong.hidden = false;
+  } else {
+    kosong.hidden = true;
+    tampil.forEach((item) => wadah.append(buatKartu(item))); // 3. isi ulang
+  }
+
+  tandaiTombolAktif(state);
   gambarNotisia(state);
 }

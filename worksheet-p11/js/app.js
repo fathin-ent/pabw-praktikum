@@ -4,6 +4,8 @@ import { render } from "./dom.js";
 import { pasangPendengar } from "./events.js";
 import { ambilNotisia } from "./api.js";
 
+window.state = state; // agar console.log(state) bisa dipanggil dari Console
+
 pasangPendengar();
 render(state);
 
@@ -12,4 +14,3 @@ try {
 } catch (galat) {
   catatGalat(galat.message);
 }
-render(state);
