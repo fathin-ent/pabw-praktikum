@@ -3,8 +3,10 @@
 
 const wadah = document.querySelector("#daftar");
 const kosong = document.querySelector("#pesan-kosong");
-export const barisFilter = document.querySelector("#filter");
 const wadahNotisia = document.querySelector("#daftar-notisia");
+export const barisFilter = document.querySelector("#filter");
+export const tombolUrut = document.querySelector("#urutkan");
+export const tombolReset = document.querySelector("#atur-ulang");
 
 function buatKartu(proyek) {
   const li = document.createElement("li");
@@ -13,18 +15,23 @@ function buatKartu(proyek) {
   return li;
 }
 
-// Dulu menyaring di dalam pendengar klik P9; kini kategorinya dari state.
 function saring(state) {
-  return state.daftarProyek.filter(
+  const hasil = state.daftarProyek.filter(
     (proyek) =>
       state.kategoriAktif === "semua" || proyek.kategori === state.kategoriAktif
   );
+  if (state.urutan === "terbalik") {
+    return [...hasil].sort((a, b) => b.judul.localeCompare(a.judul));
+  }
+  return hasil;
 }
 
 function tandaiTombolAktif(state) {
   document.querySelectorAll("#filter button").forEach((tombol) => {
     tombol.classList.toggle("aktif", tombol.dataset.kategori === state.kategoriAktif);
   });
+  tombolUrut.textContent =
+    state.urutan === "terbalik" ? "Urutan: Z–A" : "Urutan: asli";
 }
 
 function gambarNotisia(state) {
