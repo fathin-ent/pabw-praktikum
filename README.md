@@ -494,12 +494,250 @@ export function muat() {
 }
 ---
 
-## 🤖 Deklarasi AI (AI Disclosure)
+## 🤖 Deklarasi AI 
 * **Bagian yang Dibantu AI**: Penyusunan dokumentasi `README.md`, verifikasi struktur modul ES6 (`import`/`export`), dan pembagian tabel tanggung jawab berkas.
 * **Bagian yang Dikerjakan Mandiri**: Pemisahan kode JavaScript ke dalam masing-masing berkas modul (`data.js`, `state.js`, `dom.js`, `events.js`, `app.js`), pengujian di localhost server, dan pemastian fungsionalitas filter antarmuka.
 
- 
+ ## P 12 - builde tooling, npm, dan framework SPA :dari berkas lepas jadi proyek komponen yang dibangun
 
+### A.1 Versi Perkakas (Node.js & npm)
+* **Node.js**: v24.22.0
+* **npm**: 11.19.1
+
+---
+
+### A.2 Pemeriksaan Berkas Pertemuan 11
+| Berkas | Status | Jumlah Baris |
+| :--- | :---: | :---: |
+| `profil.html` | Ada | 258 |
+| Enam berkas CSS (P04–P06) | Ada | 379 |
+| `js/app.js`, `js/dom.js` | Ada | 74 |
+| `js/data.js`, `js/state.js`, `js/events.js` | Ada | 27, 90, 15 |
+| `js/api.js` (Pertemuan 10) | Ada | 12 |
+
+---
+
+### A.3 Pemeriksaan Folder Kerja & Lingkungan
+| Yang Diperiksa | Hasil yang Benar | Hasil yang Saya Dapat |
+| :--- | :--- | :--- |
+| **Folder `worksheet-p12/`** | Ada di dalam `~/pabw`, masih kosong | Sesuai dengan hasil yang benar |
+| **`node_modules/` di `worksheet-p11/`** | Tidak ada (tidak pernah disalin) | Sesuai dengan hasil yang benar |
+| **Berkas P11 sudah di-commit** | Status git bersih sebelum mulai | Awalnya belum bersih, lalu dibersihkan sehingga sesuai dengan hasil yang benar |
+| **Nomor port `npm run dev`** | Dibatasi/dicatat untuk `localStorage` | Sesuai dengan hasil yang benar |
+
+---
+
+### B. Membuat proyek baru di folder baru
+- Kerangka Vue dibuat di dalam folder `worksheet-p12/` yang masih kosong, supaya tidak ada pertanyaan yang muncul dan tidak ada berkas yang bisa hilang atau tertimpa.
+- Perintah yang dijalankan, berurutan:
+  1. `cd` ke folder repo, lalu `mkdir -p worksheet-p12` dan `cd worksheet-p12`
+  2. `npm create vite@latest . -- --template vue` (titik berarti "buat di folder ini", bukan membuat subfolder baru)
+  3. `npm install`
+  4. `npm run dev`
+- Saat ditanya "Install with npm and start now?" saya memilih **No**, supaya `npm install` dan `npm run dev` bisa dijalankan sendiri dan isi folder diperiksa lebih dulu.
+- Pertanyaan "Current directory is not empty" tidak muncul karena foldernya kosong. (Kalau muncul, pilihannya Cancel operation, bukan Remove atau Ignore.)
+
+### Berkas dan folder yang terbentuk
+| Berkas / folder | Perannya |
+|---|---|
+| `index.html` | Halaman tunggal di akar proyek, nanti diisi dari `profil.html` |
+| `src/main.js` | Titik masuk, tempat mengimpor CSS global nanti |
+| `src/App.vue` | Komponen induk, nanti memuat empat komponen |
+| `src/components/` | Tempat komponen; `HelloWorld.vue` di dalamnya akan dihapus |
+| `public/` | Berkas statis yang dibaca lewat alamat, tempat `.json` statis dari P10 |
+| `vite.config.js` | Pengaturan Vite, tidak diubah di pertemuan ini |
+| `package.json` | Daftar isi proyek (scripts, dependencies, devDependencies) |
+
+### .gitignore sebelum commit pertama
+- `.gitignore` ditulis sebelum commit pertama, supaya berkas yang tidak perlu tidak masuk riwayat Git.
+- Yang diabaikan: `node_modules/` (ribuan berkas, bisa dipasang ulang dengan `npm install`), `dist/` (hasil build, dibuat ulang dengan `npm run build`), `.env`, dan `.DS_Store`.
+- Yang **tidak** diabaikan: `package.json` dan `package-lock.json`. `package-lock.json` justru disimpan karena mengunci versi tepat seluruh paket.
+
+### Hasil pemeriksaan setelah `npm run dev`
+| Yang diperiksa | Hasil saya |
+|---|---|
+| Halaman terbuka | Halaman contoh Vue tampil di peramban ("Get started", tombol Count is 0) |
+| Alamat di terminal | `localhost:5173` (port 5173, dicatat karena localStorage terikat port) |
+| Console | (isi: bersih, atau tulis pesan yang muncul apa adanya) |
+| Folder `node_modules/` | (isi: ada di dalam `worksheet-p12/`) |
+| Git status | (isi: `node_modules/` dan `dist/` tidak terdaftar) |
+
+---
+# Lembar C — Memindahkan Aset Pertemuan 11 ke Proyek Vue
+
+## Pindah Tanpa Mengubah Perilaku
+
+### C.1 Pemindahan Berkas
+* **profil.html** → `index.html` (Tag `<link>` CSS dan `<script>` lama dibuang; menyisakan `<div id="app"></div>` dan `<script type="module" src="/src/main.js"></script>`).
+* **Enam berkas CSS** → `src/` (Ditempatkan di folder `src/`, isinya tidak diubah).
+* **js/data.js** → `src/data.js` (Isi tetap).
+* **js/state.js & js/events.js** → `src/` (Disiapkan untuk disambungkan di lembar selanjutnya).
+* **js/api.js (P10)** → `src/api.js` (Fungsi `fetch` tetap di dalamnya tanpa perubahan).
+
+---
+
+## C.2 & C.3 Pengaturan Import CSS dan App.vue
+
+Seluruh berkas CSS diimpor melalui `src/main.js` dengan urutan:
+1. `./tokens.css`
+2. `./base.css`
+3. `./layout.css`
+4. `./komponen.css`
+5. `./tema.css`
+6. `./responsif.css`
+
+Isi `src/App.vue` telah diganti sementara dengan tampilan sederhana sebelum dipecah menjadi komponen pada Lembar D. Berkas contoh dari Vite (`HelloWorld.vue`) telah dihapus.
+
+---
+
+## Hasil Pemeriksaan (Tabel Lembar C)
+
+| Yang Diperiksa | Hasil yang Benar | Hasil yang Saya Dapat |
+| :--- | :--- | :--- |
+| **Baris `<link>` di index.html** | Tidak ada lagi | Hanya tersisa `link rel="icon"` |
+| **Enam berkas CSS** | Ada di `src/` dan diimpor di `main.js` | Ada |
+| **Tampilan halaman** | Sama seperti P11 — warna, huruf, jarak | Ada |
+| **Console** | Bersih; tidak ada galat 404 berkas CSS | Bersih / Tidak ada error |
+| **Berkas contoh Vue** | `HelloWorld.vue` dan isinya sudah dihapus | Sudah dihapus |
+| **Halaman di npm run dev** | Terbuka tanpa galat; isinya masih sementara | Berjalan lancar tanpa error |
+| **Data** | Ada di `src/data.js` dan dipakai halaman | Sudah ada, siap dipakai di Lembar D |
+| **Tampilan diubah?** | Tidak — token dan CSS P04–P06 apa adanya | Tampilan sesuai dengan aset asli |
+
+---
+## Lembar D — Memecah halaman menjadi empat komponen
+
+### Yang dikerjakan
+Halaman dipecah menjadi empat komponen di `src/components/`, lalu dipasang langsung di `App.vue`:
+
+| Komponen | Bagian halaman | Data yang dipakai |
+|---|---|---|
+| KepalaProfil.vue | Identitas di atas halaman | props `profil` dari App.vue |
+| TombolFilter.vue | Deretan tombol kategori | state bersama (`state.js`) |
+| DaftarProyek.vue | Daftar kartu proyek + penyaringan | state bersama (`state.js`) |
+| FormKontak.vue | Formulir kontak | `ref` lokal di komponennya |
+
+### Persiapan sebelum memecah
+- `data.js`: menambahkan `id` unik (1 dan 2) pada setiap proyek, karena `:key` di `v-for` membutuhkannya.
+- `state.js`: menghapus impor `dom.js` dan semua pemanggilan `render(state)` (di Vue, tampilan digambar dari template), lalu membungkus `state` dengan `reactive()`.
+- `main.js`: memanggil `pulihkan()` sebelum `createApp(App).mount('#app')`.
+
+### Tabel D.3 — Yang diperiksa
+| Yang diperiksa | Hasil yang saya dapat |
+|---|---|
+| Empat komponen | Ada empat berkas `.vue` di `src/components/` |
+| props KepalaProfil | Terisi dari App.vue lewat `:profil="identitas"`; nama dan peran tampil |
+| props diubah dari anak? | Tidak, KepalaProfil hanya membaca |
+| Nama berkas dan impor | Sempat berbeda: berkas bernama `KepalaProfile.vue` sedangkan impor `KepalaProfil.vue`, Vite menampilkan "Failed to resolve import". Berkas saya ganti nama jadi `KepalaProfil.vue` |
+| Console | Sempat muncul peringatan "Failed to resolve component: DaftarProyek" karena impor di App.vue belum benar. Setelah diperbaiki, Console bersih |
+
+### Tabel D.4 — Pohon komponen
+| Komponen | Di dalam komponen apa ia dipakai | Menerima props? |
+|---|---|---|
+| KepalaProfil.vue | App.vue | Ya, `profil` |
+| TombolFilter.vue | App.vue | Tidak |
+| DaftarProyek.vue | App.vue | Tidak |
+| FormKontak.vue | App.vue | Tidak |
+
+---
+# Lembar E — Menyambungkan Kembali Keadaan dan Simpanannya
+
+## Ringkasan Perubahan
+* **src/state.js**: Membungkus objek state menggunakan `reactive()`[cite: 9]. Fungsi `pilihKategori()` hanya mengubah nilai state tanpa perlu memanggil `render()` manual[cite: 9].
+* **src/simpanan.js**: Menampung logika `simpan()`, `muat()`, dan `aturUlang()` dengan kunci `"pabw-p11"` dan `VERSI = 2`[cite: 9, 10].
+* **src/App.vue**: Menggunakan `onMounted` untuk memulihkan state dari `localStorage`, `watch` untuk menyimpan perubahan state secara reaktif, serta tombol atur ulang pilihan[cite: 9, 10].
+
+---
+
+## E.3 Hasil Pemeriksaan Keadaan & Simpanan
+
+| Yang Diperiksa | Hasil yang Benar | Hasil yang Saya Dapat |
+| :--- | :--- | :--- |
+| **Ganti kategori** | Hanya state yang berubah; tampilan mengikuti sendiri | Saat klik `web`, lalu `data`, tampilan berubah tanpa memanggil `render()`[cite: 10]. |
+| **Tutup tab, lalu buka lagi** | Pilihan terakhir masih ada | Ya, saat klik `data` lalu tutup tab dan buka port lagi, pilihan terakhir masih ada[cite: 10]. |
+| **localStorage di Console** | Isinya berupa teks JSON, bukan `[object Object]` | Hasil dari pengecekan localStorage-nya: `{"versi":2,"kategoriAktif":"data","urutan":...}`[cite: 10]. |
+| **render(state) lama** | Sudah tidak ada di berkas mana pun | Tidak ditemukan pemanggilan `render()` di seluruh berkas proyek[cite: 10]. Berkas `events.js` dan `dom.js` sudah dihapus/tidak digunakan lagi[cite: 10]. |
+| **Tombol atur ulang** | Kategori kembali ke `"semua"`; simpanan berisi nilai bawaan; tanpa galat | Ya, sesuai dengan hasil yang benar[cite: 10]. |
+| **Console** | Bersih; tidak ada peringatan `watch` atau reaktivitas | Tidak ada peringatan `watch` atau reaktivitas[cite: 10]. |
+
+---
+
+## E.4 Penanganan Uji Ketahanan Simpanan (Bila Simpanannya Rusak)
+
+| Yang Ditulis di Console | Yang Harus Terjadi | Hasil yang Saya Dapat |
+| :--- | :--- | :--- |
+| `localStorage.setItem("pabw-p11", "bukan-json")`[cite: 10] | Halaman tetap terbuka; simpanan dibuang; nilai bawaan dipakai[cite: 10] | Halaman tetap terbuka normal dengan nilai bawaan (`semua`)[cite: 10]. Saat di-refresh, data rusak ditangani oleh `try-catch` di `muat()` dan `getItem` mengembalikan `null`[cite: 10]. |
+| **npm run dev dihentikan lalu dijalankan lagi**[cite: 11] | Pilihan terakhir tetap ada[cite: 11] | Kategori terpilih tetap tersimpan dan terbaca selama port server tidak berubah[cite: 11]. |
+| `localStorage.clear()`[cite: 11] | Halaman kembali ke nilai bawaan tanpa galat[cite: 11] | Halaman dapat dimuat kembali ke nilai bawaan tanpa ada pesan error di Console[cite: 11]. |
+
+---
+# Lembar F — Membangun dan Mencoba Hasil Build
+
+## F.1 Tiga Perintah Utama
+* `npm run dev`: Menjalankan server pengembangan dengan pemuatan ulang otomatis (*HMR*) selama mengerjakan[cite: 15].
+* `npm run build`: Menggabungkan dan memperkecil (*minify*) berkas sumber menjadi folder `dist/` setelah pekerjaan selesai[cite: 15].
+* `npm run preview`: Menjalankan isi folder `dist/` seperti situs sungguhan untuk memastikan hasil build benar[cite: 15].
+
+---
+
+## F.2 Hasil Build Saya
+
+| Yang Diperiksa | Hasil yang Saya Dapat |
+| :--- | :--- |
+| **Folder dist/ terbentuk** | Ya, folder `dist/` berhasil dibentuk setelah perintah `npm run build`[cite: 15]. |
+| **dist/index.html ada** | Ada[cite: 15]. |
+| **dist/assets/ berisi berkas .js dan .css** | Ada[cite: 15]. |
+| **Nama berkas di dist/assets/ memuat huruf dan angka acak** | Ya, dengan nama `index-Cm-2f-Yz.css` dan `index-6DRL4F1y.js`[cite: 15]. |
+| **Halaman jalan lewat npm run preview** | Berjalanan tanpa hambatan[cite: 15]. |
+| **Console bersih saat preview dibuka** | Bersih, tidak ada pesan galat[cite: 15]. |
+
+---
+
+## F.3 Ukuran Sebelum dan Sesudah Build
+
+| Yang Diukur | Sebelum Build (`npm run dev`) | Sesudah Build (`npm run preview`) |
+| :--- | :--- | :--- |
+| **Ukuran seluruh berkas yang dikirim** | 1,5 MB[cite: 15] | 73,5 kB[cite: 15] |
+| **Jumlah berkas yang dikirim peramban** | 22 request[cite: 15] | 3 request[cite: 15] |
+| **Cara mengukurnya di DevTools** | Tab Network, muat ulang halaman[cite: 15] | Tab Network, muat ulang halaman[cite: 15] |
+
+---
+
+## F.5 Yang Sengaja Tidak Saya Commit
+
+| Yang Tidak Di-commit | Alasan Saya |
+| :--- | :--- |
+| `dist/`[cite: 16] | Hasil build dibuat ulang kapan saja dengan `npm run build`[cite: 16]. |
+| `node_modules/`[cite: 16] | Isinya ribuan berkas dan bisa dipasang ulang dengan `npm install`[cite: 16]. |
+
+--
+### Hasil dan catatan jujur
+- Keempat komponen tampil dan Console bersih.
+- Tombol kategori: **[ISI: apakah tombol aktif berpindah saat diklik? Kalau tidak, tulis penyebabnya, misalnya nama class `aktif` belum cocok dengan CSS]**.
+- Daftar proyek hanya berisi **dua** kartu (data saya memang dua proyek), bukan tiga seperti di worksheet. Klik `web` menampilkan dua kartu, klik `data` menampilkan pesan kosong karena belum ada proyek berkategori `data`.
+- Form kontak: **[ISI: huruf yang diketik tetap ada? Tombol Kirim tidak memuat ulang halaman?]**.
+- Tampilan belum sama dengan versi P11. Yang dipindahkan baru kerangka empat komponen, dan template-nya belum mengikuti markup `profil.html` (navigasi, foto, tabel kegiatan, galeri, dan bagian lain belum dipindahkan).
+- Notisia dari API (`api.js`, `#daftar-notisia`) belum dipindahkan ke komponen Vue.
+
+### Screenshot
+**[ISI: nama berkas screenshot, misalnya `screenshots/d-komponen.png`]**
+
+### Deklarasi penggunaan AI
+Saya memakai Claude (Anthropic) sebagai pendamping belajar untuk Lembar D. Claude menjelaskan langkah demi langkah, memberi kerangka kode empat komponen dan perubahan pada `state.js`, `data.js`, dan `main.js`, serta membantu membaca pesan error (salah nama berkas dan peringatan komponen belum terimpor). Saya sendiri yang membuat berkas, memasukkan kode ke proyek, menjalankan `npm run dev`, memeriksa hasil di browser dan Console, memperbaiki error, serta mengisi tabel berdasarkan hasil yang saya lihat. Kerangka kode dari Claude belum disesuaikan penuh dengan markup P11.
+
+## Deklarasi Penggunaan AI
+Asisten AI (Claude) digunakan untuk membantu memberikan petunjuk langkah demi langkah dan menyusun kerangka dokumentasi. Seluruh eksekusi perintah, pemindahan berkas, pengujian dev server (`npm run dev`), serta verifikasi hasil dilakukan secara mandiri oleh Fathin.
+
+### Deklarasi Penggunaan AI
+**Dibantu AI (Claude):**
+- Menjelaskan isi Lembar A dan B dan urutan langkah pengerjaannya.
+- Membantu membaca pesan di terminal dan Git (misalnya status yang belum bersih sebelum mulai).
+- Membantu menyusun kerangka README ini.
+
+**Saya kerjakan sendiri:**
+- Menjalankan perintah di terminal (membuat folder, membuat proyek Vite, `npm install`, `npm run dev`).
+- Memilih jawaban pada pertanyaan pemasangan dan memeriksa isi folder yang terbentuk.
+- Memeriksa halaman di peramban, mencatat port, dan mengisi tabel hasil.
+- Mengelola Git dan GitHub (commit dan push).
 
 
   
