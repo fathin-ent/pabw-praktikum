@@ -8,12 +8,14 @@ export const profil = {
 
 export const daftarProyek = [
   {
+    id: 1,
     judul: "Halaman Profil",
     tahun: 2026,
     selesai: false,
     kategori: "web",
   },
   {
+    id: 2,
     judul: "Website Media Komunikasi",
     tahun: 2026,
     selesai: false,

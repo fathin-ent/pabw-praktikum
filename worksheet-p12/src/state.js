@@ -1,7 +1,7 @@
 // state.js — satu objek state, fungsi pengubahnya, dan penyimpanan di peramban.
 // Setiap perubahan: ubah state -> simpan -> render.
 import { daftarProyek } from "./data.js";
-import { render } from "./dom.js";
+import { reactive } from "vue";
 
 const KUNCI = "pabw-p11";
 const VERSI = 2;
@@ -11,14 +11,14 @@ const BAWAAN = { kategoriAktif: "semua", urutan: "asli" };
 const KATEGORI_SAH = ["semua", "web", "data"];
 const URUTAN_SAH = ["asli", "terbalik"];
 
-export const state = {
+export const state = reactive({
   daftarProyek,                 // data proyek, dari data.js (tidak disimpan)
   kategoriAktif: BAWAAN.kategoriAktif,
   urutan: BAWAAN.urutan,
   notisia: [],                  // data dari API (tidak disimpan)
   statusNotisia: "memuat",      // "memuat" | "siap" | "galat"
   pesanGalat: "",
-};
+});
 
 /* ---------- penyimpanan (D.1) ---------- */
 
@@ -48,7 +48,6 @@ export function aturUlang() {
   }
   state.kategoriAktif = BAWAAN.kategoriAktif;
   state.urutan = BAWAAN.urutan;
-  render(state);
 }
 
 // Dipanggil sekali saat halaman pertama dimuat (sebelum render pertama).
@@ -69,23 +68,19 @@ export function pulihkan() {
 export function pilihKategori(nilai) {
   state.kategoriAktif = nilai;
   simpan();
-  render(state);
 }
 
 export function gantiUrutan() {
   state.urutan = state.urutan === "asli" ? "terbalik" : "asli";
   simpan();
-  render(state);
 }
 
 export function isiNotisia(daftar) {
   state.notisia = daftar;
   state.statusNotisia = "siap";
-  render(state);
 }
 
 export function catatGalat(pesan) {
   state.statusNotisia = "galat";
   state.pesanGalat = pesan;
-  render(state);
 }
