@@ -603,6 +603,14 @@ Isi `src/App.vue` telah diganti sementara dengan tampilan sederhana sebelum dipe
 | **Data** | Ada di `src/data.js` dan dipakai halaman | Sudah ada, siap dipakai di Lembar D |
 | **Tampilan diubah?** | Tidak — token dan CSS P04–P06 apa adanya | Tampilan sesuai dengan aset asli |
 
+### Hasil dan catatan jujur
+- Keempat komponen tampil dan Console bersih.
+- Tombol kategori: **[ISI: apakah tombol aktif berpindah saat diklik? Kalau tidak, tulis penyebabnya, misalnya nama class `aktif` belum cocok dengan CSS]**.
+- Daftar proyek hanya berisi **dua** kartu (data saya memang dua proyek), bukan tiga seperti di worksheet. Klik `web` menampilkan dua kartu, klik `data` menampilkan pesan kosong karena belum ada proyek berkategori `data`.
+- Form kontak: **[ISI: huruf yang diketik tetap ada? Tombol Kirim tidak memuat ulang halaman?]**.
+- Tampilan belum sama dengan versi P11. Yang dipindahkan baru kerangka empat komponen, dan template-nya belum mengikuti markup `profil.html` (navigasi, foto, tabel kegiatan, galeri, dan bagian lain belum dipindahkan).
+- Notisia dari API (`api.js`, `#daftar-notisia`) belum dipindahkan ke komponen Vue.
+
 ---
 ## Lembar D — Memecah halaman menjadi empat komponen
 
@@ -710,34 +718,9 @@ Halaman dipecah menjadi empat komponen di `src/components/`, lalu dipasang langs
 | `node_modules/`[cite: 16] | Isinya ribuan berkas dan bisa dipasang ulang dengan `npm install`[cite: 16]. |
 
 --
-### Hasil dan catatan jujur
-- Keempat komponen tampil dan Console bersih.
-- Tombol kategori: **[ISI: apakah tombol aktif berpindah saat diklik? Kalau tidak, tulis penyebabnya, misalnya nama class `aktif` belum cocok dengan CSS]**.
-- Daftar proyek hanya berisi **dua** kartu (data saya memang dua proyek), bukan tiga seperti di worksheet. Klik `web` menampilkan dua kartu, klik `data` menampilkan pesan kosong karena belum ada proyek berkategori `data`.
-- Form kontak: **[ISI: huruf yang diketik tetap ada? Tombol Kirim tidak memuat ulang halaman?]**.
-- Tampilan belum sama dengan versi P11. Yang dipindahkan baru kerangka empat komponen, dan template-nya belum mengikuti markup `profil.html` (navigasi, foto, tabel kegiatan, galeri, dan bagian lain belum dipindahkan).
-- Notisia dari API (`api.js`, `#daftar-notisia`) belum dipindahkan ke komponen Vue.
-
-### Screenshot
-**[ISI: nama berkas screenshot, misalnya `screenshots/d-komponen.png`]**
 
 ### Deklarasi penggunaan AI
 Saya memakai Claude (Anthropic) sebagai pendamping belajar untuk Lembar D. Claude menjelaskan langkah demi langkah, memberi kerangka kode empat komponen dan perubahan pada `state.js`, `data.js`, dan `main.js`, serta membantu membaca pesan error (salah nama berkas dan peringatan komponen belum terimpor). Saya sendiri yang membuat berkas, memasukkan kode ke proyek, menjalankan `npm run dev`, memeriksa hasil di browser dan Console, memperbaiki error, serta mengisi tabel berdasarkan hasil yang saya lihat. Kerangka kode dari Claude belum disesuaikan penuh dengan markup P11.
-
-## Deklarasi Penggunaan AI
-Asisten AI (Claude) digunakan untuk membantu memberikan petunjuk langkah demi langkah dan menyusun kerangka dokumentasi. Seluruh eksekusi perintah, pemindahan berkas, pengujian dev server (`npm run dev`), serta verifikasi hasil dilakukan secara mandiri oleh Fathin.
-
-### Deklarasi Penggunaan AI
-**Dibantu AI (Claude):**
-- Menjelaskan isi Lembar A dan B dan urutan langkah pengerjaannya.
-- Membantu membaca pesan di terminal dan Git (misalnya status yang belum bersih sebelum mulai).
-- Membantu menyusun kerangka README ini.
-
-**Saya kerjakan sendiri:**
-- Menjalankan perintah di terminal (membuat folder, membuat proyek Vite, `npm install`, `npm run dev`).
-- Memilih jawaban pada pertanyaan pemasangan dan memeriksa isi folder yang terbentuk.
-- Memeriksa halaman di peramban, mencatat port, dan mengisi tabel hasil.
-- Mengelola Git dan GitHub (commit dan push).
 
 
   
